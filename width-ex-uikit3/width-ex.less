@@ -1,0 +1,329 @@
+// Name:         Width extended
+// Description:  Utilities for widths, *-7, *-8, *-9, *-10, *-12 cols
+//
+// Component:   `uk-child-width-*`
+//              `uk-width-*`
+//              `uk-pull-*`
+//              `uk-push-*`
+//
+// ========================================================================
+
+
+@breakpoint-small:                             640px;  // Phone landscape
+@breakpoint-medium:                            960px;  // Tablet Landscape
+@breakpoint-large:                             1200px; // Desktop
+@breakpoint-xlarge:                            1600px; // Large Screens
+
+@breakpoint-xsmall-max:                        (@breakpoint-small - 1);
+@breakpoint-small-max:                         (@breakpoint-medium - 1);
+@breakpoint-medium-max:                        (@breakpoint-large - 1);
+@breakpoint-large-max:                         (@breakpoint-xlarge - 1);
+
+
+/* ========================================================================
+   Component: Width extended
+ ========================================================================== */
+
+
+/* Mixins
+ ========================================================================== */
+
+
+.getProperty(@col: 1, @cols: 1, @val: ~'width')
+{
+	@{val}: floor( @col * (100% / @cols) * 1000 ) / 1000;
+}
+
+.getCols(@cl, @i, @c, @sfx: none, @val: ~'width') when (@i < @c)
+{
+	& when not (@sfx = none)
+	{
+		.uk-@{cl}-@{i}-@{c}@{sfx} { .getProperty(@i, @c, @val); }
+	}
+	& when (@sfx = none)
+	{
+		.uk-@{cl}-@{i}-@{c} { .getProperty(@i, @c, @val); }
+	}
+	.getCols(@cl, @i + 1, @c, @sfx, @val);
+}
+
+
+.getPropertyPP(@col: 1, @cols: 1, @val: ~'width')
+{
+	@v: floor( @col * (100% / @cols) * 1000 ) / 1000;
+	@{val}: -@v;
+}
+
+.getColsPP(@cl, @i, @c, @sfx: none, @val: ~'width') when (@i < @c)
+{
+	& when not (@sfx = none)
+	{
+		.uk-@{cl}-@{i}-@{c}@{sfx} { .getPropertyPP(@i, @c, @val); }
+	}
+	& when (@sfx = none)
+	{
+		.uk-@{cl}-@{i}-@{c} { .getPropertyPP(@i, @c, @val); }
+	}
+	.getColsPP(@cl, @i + 1, @c, @sfx, @val);
+}
+
+
+
+/* Equal child widths
+ ========================================================================== */
+
+
+.uk-child-width-1-7 > *  { .getProperty(1,7); }
+.uk-child-width-1-8 > *  { .getProperty(1,8); }
+.uk-child-width-1-9 > *  { .getProperty(1,9); }
+.uk-child-width-1-10 > * { .getProperty(1,10); }
+.uk-child-width-1-12 > * { .getProperty(1,12); }
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+	 .uk-child-width-1-7\@s > * { .getProperty(1,7); }
+	 .uk-child-width-1-8\@s > * { .getProperty(1,8); }
+	 .uk-child-width-1-9\@s > * { .getProperty(1,9); }
+	.uk-child-width-1-10\@s > * { .getProperty(1,10); }
+	.uk-child-width-1-12\@s > * { .getProperty(1,12); }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+	 .uk-child-width-1-7\@m > * { .getProperty(1,7); }
+	 .uk-child-width-1-8\@m > * { .getProperty(1,8); }
+	 .uk-child-width-1-9\@m > * { .getProperty(1,9); }
+	.uk-child-width-1-10\@m > * { .getProperty(1,10); }
+	.uk-child-width-1-12\@m > * { .getProperty(1,12); }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+	 .uk-child-width-1-7\@l > * { .getProperty(1,7); }
+	 .uk-child-width-1-8\@l > * { .getProperty(1,8); }
+	 .uk-child-width-1-9\@l > * { .getProperty(1,9); }
+	.uk-child-width-1-10\@l > * { .getProperty(1,10); }
+	.uk-child-width-1-12\@l > * { .getProperty(1,12); }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+	 .uk-child-width-1-7\@xl > * { .getProperty(1,7); }
+	 .uk-child-width-1-8\@xl > * { .getProperty(1,8); }
+	 .uk-child-width-1-9\@xl > * { .getProperty(1,9); }
+	.uk-child-width-1-10\@xl > * { .getProperty(1,10); }
+	.uk-child-width-1-12\@xl > * { .getProperty(1,12); }
+
+}
+
+
+/* Single Widths
+ ========================================================================== */
+
+
+.getCols(~'width', 1, 7);
+.getCols(~'width', 1, 8);
+.getCols(~'width', 1, 9);
+.getCols(~'width', 1, 10);
+.getCols(~'width', 1, 12);
+
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+	.getCols(~'width', 1, 7,  ~'\@s');
+	.getCols(~'width', 1, 8,  ~'\@s');
+	.getCols(~'width', 1, 9,  ~'\@s');
+	.getCols(~'width', 1, 10, ~'\@s');
+	.getCols(~'width', 1, 12, ~'\@s');
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+	.getCols(~'width', 1, 7,  ~'\@m');
+	.getCols(~'width', 1, 8,  ~'\@m');
+	.getCols(~'width', 1, 9,  ~'\@m');
+	.getCols(~'width', 1, 10, ~'\@m');
+	.getCols(~'width', 1, 12, ~'\@m');
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+	.getCols(~'width', 1, 7,  ~'\@l');
+	.getCols(~'width', 1, 8,  ~'\@l');
+	.getCols(~'width', 1, 9,  ~'\@l');
+	.getCols(~'width', 1, 10, ~'\@l');
+	.getCols(~'width', 1, 12, ~'\@l');
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+	.getCols(~'width', 1, 7,  ~'\@xl');
+	.getCols(~'width', 1, 8,  ~'\@xl');
+	.getCols(~'width', 1, 9,  ~'\@xl');
+	.getCols(~'width', 1, 10, ~'\@xl');
+	.getCols(~'width', 1, 12, ~'\@xl');
+
+}
+
+
+/* Sub-object: `uk-push-*` and `uk-pull-*`
+ ========================================================================== */
+
+[class*="uk-push-"],
+[class*="uk-pull-"]
+{
+	position: relative;
+}
+
+.getCols(~'push', 1, 2,  none, ~'left');
+.getCols(~'push', 1, 3,  none, ~'left');
+.getCols(~'push', 1, 4,  none, ~'left');
+.getCols(~'push', 1, 5,  none, ~'left');
+.getCols(~'push', 1, 6,  none, ~'left');
+.getCols(~'push', 1, 7,  none, ~'left');
+.getCols(~'push', 1, 8,  none, ~'left');
+.getCols(~'push', 1, 9,  none, ~'left');
+.getCols(~'push', 1, 10, none, ~'left');
+.getCols(~'push', 1, 12, none, ~'left');
+
+.getColsPP(~'pull', 1, 2,  none, ~'left');
+.getColsPP(~'pull', 1, 3,  none, ~'left');
+.getColsPP(~'pull', 1, 4,  none, ~'left');
+.getColsPP(~'pull', 1, 5,  none, ~'left');
+.getColsPP(~'pull', 1, 6,  none, ~'left');
+.getColsPP(~'pull', 1, 7,  none, ~'left');
+.getColsPP(~'pull', 1, 8,  none, ~'left');
+.getColsPP(~'pull', 1, 9,  none, ~'left');
+.getColsPP(~'pull', 1, 10, none, ~'left');
+.getColsPP(~'pull', 1, 12, none, ~'left');
+
+	
+/* Phone landscape and smaller */
+@media (max-width: @breakpoint-xsmall-max) {
+
+	.getCols(~'push', 1, 2,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 3,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 4,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 5,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 6,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 7,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 8,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 9,  ~'\@xs', ~'left');
+	.getCols(~'push', 1, 10, ~'\@xs', ~'left');
+	.getCols(~'push', 1, 12, ~'\@xs', ~'left');
+	
+	.getColsPP(~'pull', 1, 2,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 3,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 4,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 5,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 6,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 7,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 8,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 9,  ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 10, ~'\@xs', ~'left');
+	.getColsPP(~'pull', 1, 12, ~'\@xs', ~'left');
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+	.getCols(~'push', 1, 2,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 3,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 4,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 5,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 6,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 7,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 8,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 9,  ~'\@m', ~'left');
+	.getCols(~'push', 1, 10, ~'\@m', ~'left');
+	.getCols(~'push', 1, 12, ~'\@m', ~'left');
+	
+	.getColsPP(~'pull', 1, 2,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 3,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 4,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 5,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 6,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 7,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 8,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 9,  ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 10, ~'\@m', ~'left');
+	.getColsPP(~'pull', 1, 12, ~'\@m', ~'left');
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+	.getCols(~'push', 1, 2,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 3,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 4,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 5,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 6,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 7,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 8,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 9,  ~'\@l', ~'left');
+	.getCols(~'push', 1, 10, ~'\@l', ~'left');
+	.getCols(~'push', 1, 12, ~'\@l', ~'left');
+	
+	.getColsPP(~'pull', 1, 2,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 3,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 4,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 5,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 6,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 7,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 8,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 9,  ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 10, ~'\@l', ~'left');
+	.getColsPP(~'pull', 1, 12, ~'\@l', ~'left');
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+	.getCols(~'push', 1, 2,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 3,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 4,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 5,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 6,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 7,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 8,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 9,  ~'\@xl', ~'left');
+	.getCols(~'push', 1, 10, ~'\@xl', ~'left');
+	.getCols(~'push', 1, 12, ~'\@xl', ~'left');
+	
+	.getColsPP(~'pull', 1, 2,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 3,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 4,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 5,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 6,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 7,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 8,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 9,  ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 10, ~'\@xl', ~'left');
+	.getColsPP(~'pull', 1, 12, ~'\@xl', ~'left');
+
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-width-ex-misc;
+
+.hook-width-ex-misc() {}

@@ -1,0 +1,450 @@
+// Name:            Grid extended
+// Description:     Provides a responsive, fluid and nestable grid
+//
+// Component:       `uk-width-*`
+//                  `uk-push-*`
+//                  `uk-pull-*`
+//
+// Modifiers:       `uk-grid-width-*`
+//
+// ========================================================================
+
+
+@breakpoint-small:                              480px;
+@breakpoint-medium:                             768px;
+@breakpoint-large:                              960px;
+@breakpoint-xlarge:                             1220px;
+
+@breakpoint-mini-max:                           (@breakpoint-small - 1);
+@breakpoint-small-max:                          (@breakpoint-medium - 1);
+@breakpoint-medium-max:                         (@breakpoint-large - 1);
+@breakpoint-large-max:                          (@breakpoint-xlarge - 1);
+
+
+/* ========================================================================
+   Component: Width extended
+ ========================================================================== */
+
+@grid-gutter-medium-horizontal:                 50px;
+@grid-gutter-medium-vertical:                   50px;
+
+@grid-gutter-mini-horizontal:                   10px;
+@grid-gutter-mini-vertical:                     10px;
+
+@grid-gutter-micro-horizontal:                  2px;
+@grid-gutter-micro-vertical:                    2px;
+
+
+
+/* Mixins
+ ========================================================================== */
+
+
+.getProperty(@col: 1, @cols: 1, @val: ~'width')
+{
+	@{val}: floor( @col * (100% / @cols) * 1000 ) / 1000;
+}
+
+.getCols (@cl, @i, @c, @val: ~'width') when (@i < @c)
+{
+	.uk-@{cl}-@{i}-@{c} { .getProperty(@i, @c, @val); }
+	.getCols(@cl, @i + 1, @c, @val);
+}
+
+
+.getPropertyPP(@col: 1, @cols: 1, @val: ~'width')
+{
+	@v: floor( @col * (100% / @cols) * 1000 ) / 1000;
+	@{val}: -@v;
+}
+
+.getColsPP(@cl, @i, @c, @val: ~'width') when (@i < @c)
+{
+	.uk-@{cl}-@{i}-@{c} { .getPropertyPP(@i, @c, @val); }
+	.getColsPP(@cl, @i + 1, @c, @val);
+}
+
+
+
+/* Even grid cell widths
+ ========================================================================== */
+
+
+.uk-grid-width-1-7 > *  { .getProperty(1,7); }
+.uk-grid-width-1-8 > *  { .getProperty(1,8); }
+.uk-grid-width-1-9 > *  { .getProperty(1,9); }
+.uk-grid-width-1-12 > * { .getProperty(1,12); }
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+	.uk-grid-width-small-1-7 > *  { .getProperty(1,7); }
+	.uk-grid-width-small-1-8 > *  { .getProperty(1,8); }
+	.uk-grid-width-small-1-9 > *  { .getProperty(1,9); }
+	.uk-grid-width-small-1-12 > * { .getProperty(1,12); }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+	.uk-grid-width-medium-1-7 > *  { .getProperty(1,7); }
+	.uk-grid-width-medium-1-8 > *  { .getProperty(1,8); }
+	.uk-grid-width-medium-1-9 > *  { .getProperty(1,9); }
+	.uk-grid-width-medium-1-12 > * { .getProperty(1,12); }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+	.uk-grid-width-large-1-7 > *  { .getProperty(1,7); }
+	.uk-grid-width-large-1-8 > *  { .getProperty(1,8); }
+	.uk-grid-width-large-1-9 > *  { .getProperty(1,9); }
+	.uk-grid-width-large-1-12 > * { .getProperty(1,12); }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+	.uk-grid-width-xlarge-1-7 > *  { .getProperty(1,7); }
+	.uk-grid-width-xlarge-1-8 > *  { .getProperty(1,8); }
+	.uk-grid-width-xlarge-1-9 > *  { .getProperty(1,9); }
+	.uk-grid-width-xlarge-1-12 > * { .getProperty(1,12); }
+
+}
+
+
+/* Single Widths
+ ========================================================================== */
+
+
+.getCols(~'width', 1, 7);
+.getCols(~'width', 1, 8);
+.getCols(~'width', 1, 9);
+.getCols(~'width', 1, 12);
+
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+	.getCols(~'width-small', 1, 7);
+	.getCols(~'width-small', 1, 8);
+	.getCols(~'width-small', 1, 9);
+	.getCols(~'width-small', 1, 12);
+
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+	.getCols(~'width-medium', 1, 7);
+	.getCols(~'width-medium', 1, 8);
+	.getCols(~'width-medium', 1, 9);
+	.getCols(~'width-medium', 1, 12);
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+	.getCols(~'width-large', 1, 7);
+	.getCols(~'width-large', 1, 8);
+	.getCols(~'width-large', 1, 9);
+	.getCols(~'width-large', 1, 12);
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+	.getCols(~'width-xlarge', 1, 7);
+	.getCols(~'width-xlarge', 1, 8);
+	.getCols(~'width-xlarge', 1, 9);
+	.getCols(~'width-xlarge', 1, 12);
+
+}
+
+
+/* Auto-columns: `*-auto` and `*-expand`
+ ========================================================================== */
+
+.uk-width-auto,
+.uk-grid-width-auto > *
+{
+	width: auto;
+	-flex: none;
+	-webkit-flex: none;
+	flex: none;
+}
+
+.uk-width-expand,
+.uk-grid-width-expand > *
+{
+	width: 0;
+	-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+	
+.uk-width-expand,
+.uk-grid-width-expand > :not([class*='uk-width'])
+{
+	min-width: 0;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small)
+{
+	.uk-width-small-auto,
+	.uk-grid-width-small-auto > *
+	{
+		width: auto;
+		-flex: none;
+		-webkit-flex: none;
+		flex: none;
+	}
+	
+	.uk-width-small-expand,
+	.uk-grid-width-small-expand > *
+	{
+		width: 0;
+		-flex: 1;
+		-webkit-flex: 1;
+		flex: 1;
+	}
+	
+	.uk-width-small-expand,
+	.uk-grid-width-small-expand > :not([class*='uk-width'])
+	{
+		min-width: 0;
+	}
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium)
+{
+	.uk-width-medium-auto,
+	.uk-grid-width-medium-auto > *
+	{
+		width: auto;
+		-flex: none;
+		-webkit-flex: none;
+		flex: none;
+	}
+	
+	.uk-width-medium-expand,
+	.uk-grid-width-medium-expand > *
+	{
+		width: 0;
+		-flex: 1;
+		-webkit-flex: 1;
+		flex: 1;
+	}
+	
+	.uk-width-medium-expand,
+	.uk-grid-width-medium-expand > :not([class*='uk-width'])
+	{
+		min-width: 0;
+	}
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large)
+{
+	.uk-width-large-auto,
+	.uk-grid-width-large-auto > *
+	{
+		width: auto;
+		-flex: none;
+		-webkit-flex: none;
+		flex: none;
+	}
+	
+	.uk-width-large-expand,
+	.uk-grid-width-large-expand > *
+	{
+		width: 0;
+		-flex: 1;
+		-webkit-flex: 1;
+		flex: 1;
+	}
+	
+	.uk-width-large-expand,
+	.uk-grid-width-large-expand > :not([class*='uk-width'])
+	{
+		min-width: 0;
+	}
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge)
+{
+	.uk-width-xlarge-auto,
+	.uk-grid-width-xlarge-auto > *
+	{
+		width: auto;
+		-flex: none;
+		-webkit-flex: none;
+		flex: none;
+	}
+	
+	.uk-width-xlarge-expand,
+	.uk-grid-width-xlarge-expand > *
+	{
+		width: 0;
+		-flex: 1;
+		-webkit-flex: 1;
+		flex: 1;
+	}
+	
+	.uk-width-xlarge-expand,
+	.uk-grid-width-xlarge-expand > :not([class*='uk-width'])
+	{
+		min-width: 0;
+	}
+}
+
+
+/* grid-medium
+ ========================================================================== */
+
+.uk-grid-medium { margin-left: -@grid-gutter-medium-horizontal; }
+.uk-grid-medium > * { padding-left: @grid-gutter-medium-horizontal; }
+.uk-grid-medium.uk-grid-divider > * { padding-right: @grid-gutter-medium-horizontal; }
+
+.uk-grid-medium + .uk-grid-medium,
+.uk-grid-medium > .uk-grid-margin,
+.uk-grid-medium > * > .uk-panel + .uk-panel { margin-top: @grid-gutter-medium-vertical; }
+
+
+/* grid-mini
+ ========================================================================== */
+
+.uk-grid-mini { margin-left: -@grid-gutter-mini-horizontal; }
+.uk-grid-mini > * { padding-left: @grid-gutter-mini-horizontal; }
+.uk-grid-mini.uk-grid-divider > * { padding-right: @grid-gutter-mini-horizontal; }
+
+.uk-grid-mini + .uk-grid-mini,
+.uk-grid-mini > .uk-grid-margin,
+.uk-grid-mini > * > .uk-panel + .uk-panel { margin-top: @grid-gutter-mini-vertical; }
+
+
+/* grid-micro
+ ========================================================================== */
+
+.uk-grid-micro { margin-left: -@grid-gutter-micro-horizontal; }
+.uk-grid-micro > * { padding-left: @grid-gutter-micro-horizontal; }
+.uk-grid-micro.uk-grid-divider > * { padding-right: @grid-gutter-micro-horizontal; }
+
+.uk-grid-micro + .uk-grid-micro,
+.uk-grid-micro > .uk-grid-margin,
+.uk-grid-micro > * > .uk-panel + .uk-panel { margin-top: @grid-gutter-micro-vertical; }
+
+
+
+/* Sub-object: `uk-push-*` and `uk-pull-*`
+ ========================================================================== */
+ 
+/*
+ * Source ordering
+ * Works only with `uk-width-medium-*`
+ */
+
+@media (min-width: @breakpoint-medium) {
+
+	.getCols(~'push', 1, 7,  ~'left');
+	.getCols(~'push', 1, 8,  ~'left');
+	.getCols(~'push', 1, 9,  ~'left');
+	.getCols(~'push', 1, 12, ~'left');
+	
+	.getColsPP(~'pull', 1, 7,  ~'left');
+	.getColsPP(~'pull', 1, 8,  ~'left');
+	.getColsPP(~'pull', 1, 9,  ~'left');
+	.getColsPP(~'pull', 1, 12, ~'left');
+
+}
+
+
+/*
+ * Source ordering
+ * Works only with `uk-width-large-*`
+ */
+ 
+@media (min-width: @breakpoint-large) {
+
+	[class*="uk-large-push-"],
+	[class*="uk-large-pull-"]
+	{
+		position: relative;
+	}
+	
+	.getCols(~'large-push', 1, 2,  ~'left');
+	.getCols(~'large-push', 1, 3,  ~'left');
+	.getCols(~'large-push', 1, 4,  ~'left');
+	.getCols(~'large-push', 1, 5,  ~'left');
+	.getCols(~'large-push', 1, 6,  ~'left');
+	.getCols(~'large-push', 1, 7,  ~'left');
+	.getCols(~'large-push', 1, 8,  ~'left');
+	.getCols(~'large-push', 1, 9,  ~'left');
+	.getCols(~'large-push', 1, 10, ~'left');
+	.getCols(~'large-push', 1, 12, ~'left');
+	
+	.getColsPP(~'large-pull', 1, 2,  ~'left');
+	.getColsPP(~'large-pull', 1, 3,  ~'left');
+	.getColsPP(~'large-pull', 1, 4,  ~'left');
+	.getColsPP(~'large-pull', 1, 5,  ~'left');
+	.getColsPP(~'large-pull', 1, 6,  ~'left');
+	.getColsPP(~'large-pull', 1, 7,  ~'left');
+	.getColsPP(~'large-pull', 1, 8,  ~'left');
+	.getColsPP(~'large-pull', 1, 9,  ~'left');
+	.getColsPP(~'large-pull', 1, 10, ~'left');
+	.getColsPP(~'large-pull', 1, 12, ~'left');
+
+}
+
+/*
+ * Source ordering
+ * Works only with `uk-width-xlarge-*`
+ */
+ 
+@media (min-width: @breakpoint-xlarge) {
+
+	[class*="uk-xlarge-push-"],
+	[class*="uk-xlarge-pull-"]
+	{
+		position: relative;
+	}
+	
+	.getCols(~'xlarge-push', 1, 2,  ~'left');
+	.getCols(~'xlarge-push', 1, 3,  ~'left');
+	.getCols(~'xlarge-push', 1, 4,  ~'left');
+	.getCols(~'xlarge-push', 1, 5,  ~'left');
+	.getCols(~'xlarge-push', 1, 6,  ~'left');
+	.getCols(~'xlarge-push', 1, 7,  ~'left');
+	.getCols(~'xlarge-push', 1, 8,  ~'left');
+	.getCols(~'xlarge-push', 1, 9,  ~'left');
+	.getCols(~'xlarge-push', 1, 10, ~'left');
+	.getCols(~'xlarge-push', 1, 12, ~'left');
+	
+	.getColsPP(~'xlarge-pull', 1, 2,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 3,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 4,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 5,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 6,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 7,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 8,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 9,  ~'left');
+	.getColsPP(~'xlarge-pull', 1, 10, ~'left');
+	.getColsPP(~'xlarge-pull', 1, 12, ~'left');
+
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-grid-ex-misc;
+
+.hook-grid-ex-misc() {}
