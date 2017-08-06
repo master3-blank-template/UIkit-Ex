@@ -9,7 +9,7 @@
 //
 // ========================================================================
 
-
+/*
 @breakpoint-small:                              480px;
 @breakpoint-medium:                             768px;
 @breakpoint-large:                              960px;
@@ -19,11 +19,16 @@
 @breakpoint-small-max:                          (@breakpoint-medium - 1);
 @breakpoint-medium-max:                         (@breakpoint-large - 1);
 @breakpoint-large-max:                          (@breakpoint-xlarge - 1);
-
+*/
 
 /* ========================================================================
    Component: Width extended
  ========================================================================== */
+
+@col-7:  true;
+@col-8:  true;
+@col-9:  true;
+@col-12: true;
 
 @grid-gutter-medium-horizontal:                 50px;
 @grid-gutter-medium-vertical:                   50px;
@@ -70,48 +75,48 @@
  ========================================================================== */
 
 
-.uk-grid-width-1-7 > *  { .getProperty(1,7); }
-.uk-grid-width-1-8 > *  { .getProperty(1,8); }
-.uk-grid-width-1-9 > *  { .getProperty(1,9); }
-.uk-grid-width-1-12 > * { .getProperty(1,12); }
+& when (@col-7  = true) { .uk-grid-width-1-7 > *  { .getProperty(1,7); }  }
+& when (@col-8  = true) { .uk-grid-width-1-8 > *  { .getProperty(1,8); }  }
+& when (@col-9  = true) { .uk-grid-width-1-9 > *  { .getProperty(1,9); }  }
+& when (@col-12 = true) { .uk-grid-width-1-12 > * { .getProperty(1,12); } }
 
 /* Phone landscape and bigger */
 @media (min-width: @breakpoint-small) {
 
-	.uk-grid-width-small-1-7 > *  { .getProperty(1,7); }
-	.uk-grid-width-small-1-8 > *  { .getProperty(1,8); }
-	.uk-grid-width-small-1-9 > *  { .getProperty(1,9); }
-	.uk-grid-width-small-1-12 > * { .getProperty(1,12); }
+	& when (@col-7  = true) { .uk-grid-width-small-1-7 > *  { .getProperty(1,7); }  }
+	& when (@col-8  = true) { .uk-grid-width-small-1-8 > *  { .getProperty(1,8); }  }
+	& when (@col-9  = true) { .uk-grid-width-small-1-9 > *  { .getProperty(1,9); }  }
+	& when (@col-12 = true) { .uk-grid-width-small-1-12 > * { .getProperty(1,12); } }
 
 }
 
 /* Tablet landscape and bigger */
 @media (min-width: @breakpoint-medium) {
 
-	.uk-grid-width-medium-1-7 > *  { .getProperty(1,7); }
-	.uk-grid-width-medium-1-8 > *  { .getProperty(1,8); }
-	.uk-grid-width-medium-1-9 > *  { .getProperty(1,9); }
-	.uk-grid-width-medium-1-12 > * { .getProperty(1,12); }
+	& when (@col-7  = true) { .uk-grid-width-medium-1-7 > *  { .getProperty(1,7); }  }
+	& when (@col-8  = true) { .uk-grid-width-medium-1-8 > *  { .getProperty(1,8); }  }
+	& when (@col-9  = true) { .uk-grid-width-medium-1-9 > *  { .getProperty(1,9); }  }
+	& when (@col-12 = true) { .uk-grid-width-medium-1-12 > * { .getProperty(1,12); } }
 
 }
 
 /* Desktop and bigger */
 @media (min-width: @breakpoint-large) {
 
-	.uk-grid-width-large-1-7 > *  { .getProperty(1,7); }
-	.uk-grid-width-large-1-8 > *  { .getProperty(1,8); }
-	.uk-grid-width-large-1-9 > *  { .getProperty(1,9); }
-	.uk-grid-width-large-1-12 > * { .getProperty(1,12); }
+	& when (@col-7  = true) { .uk-grid-width-large-1-7 > *  { .getProperty(1,7); }  }
+	& when (@col-8  = true) { .uk-grid-width-large-1-8 > *  { .getProperty(1,8); }  }
+	& when (@col-9  = true) { .uk-grid-width-large-1-9 > *  { .getProperty(1,9); }  }
+	& when (@col-12 = true) { .uk-grid-width-large-1-12 > * { .getProperty(1,12); } }
 
 }
 
 /* Large screen and bigger */
 @media (min-width: @breakpoint-xlarge) {
 
-	.uk-grid-width-xlarge-1-7 > *  { .getProperty(1,7); }
-	.uk-grid-width-xlarge-1-8 > *  { .getProperty(1,8); }
-	.uk-grid-width-xlarge-1-9 > *  { .getProperty(1,9); }
-	.uk-grid-width-xlarge-1-12 > * { .getProperty(1,12); }
+	& when (@col-7  = true) { .uk-grid-width-xlarge-1-7 > *  { .getProperty(1,7); }  }
+	& when (@col-8  = true) { .uk-grid-width-xlarge-1-8 > *  { .getProperty(1,8); }  }
+	& when (@col-9  = true) { .uk-grid-width-xlarge-1-9 > *  { .getProperty(1,9); }  }
+	& when (@col-12 = true) { .uk-grid-width-xlarge-1-12 > * { .getProperty(1,12); } }
 
 }
 
@@ -120,49 +125,49 @@
  ========================================================================== */
 
 
-.getCols(~'width', 1, 7);
-.getCols(~'width', 1, 8);
-.getCols(~'width', 1, 9);
-.getCols(~'width', 1, 12);
+& when (@col-7  = true) { .getCols(~'width', 1, 7);  }
+& when (@col-8  = true) { .getCols(~'width', 1, 8);  }
+& when (@col-9  = true) { .getCols(~'width', 1, 9);  }
+& when (@col-12 = true) { .getCols(~'width', 1, 12); }
 
 
 /* Phone landscape and bigger */
 @media (min-width: @breakpoint-small) {
 
-	.getCols(~'width-small', 1, 7);
-	.getCols(~'width-small', 1, 8);
-	.getCols(~'width-small', 1, 9);
-	.getCols(~'width-small', 1, 12);
+	& when (@col-7  = true) { .getCols(~'width-small', 1, 7);  }
+	& when (@col-8  = true) { .getCols(~'width-small', 1, 8);  }
+	& when (@col-9  = true) { .getCols(~'width-small', 1, 9);  }
+	& when (@col-12 = true) { .getCols(~'width-small', 1, 12); }
 
 }
 
 /* Tablet and bigger */
 @media (min-width: @breakpoint-medium) {
 
-	.getCols(~'width-medium', 1, 7);
-	.getCols(~'width-medium', 1, 8);
-	.getCols(~'width-medium', 1, 9);
-	.getCols(~'width-medium', 1, 12);
+	& when (@col-7  = true) { .getCols(~'width-medium', 1, 7);  }
+	& when (@col-8  = true) { .getCols(~'width-medium', 1, 8);  }
+	& when (@col-9  = true) { .getCols(~'width-medium', 1, 9);  }
+	& when (@col-12 = true) { .getCols(~'width-medium', 1, 12); }
 
 }
 
 /* Desktop and bigger */
 @media (min-width: @breakpoint-large) {
 
-	.getCols(~'width-large', 1, 7);
-	.getCols(~'width-large', 1, 8);
-	.getCols(~'width-large', 1, 9);
-	.getCols(~'width-large', 1, 12);
+	& when (@col-7  = true) { .getCols(~'width-large', 1, 7);  }
+	& when (@col-8  = true) { .getCols(~'width-large', 1, 8);  }
+	& when (@col-9  = true) { .getCols(~'width-large', 1, 9);  }
+	& when (@col-12 = true) { .getCols(~'width-large', 1, 12); }
 
 }
 
 /* Large screen and bigger */
 @media (min-width: @breakpoint-xlarge) {
 
-	.getCols(~'width-xlarge', 1, 7);
-	.getCols(~'width-xlarge', 1, 8);
-	.getCols(~'width-xlarge', 1, 9);
-	.getCols(~'width-xlarge', 1, 12);
+	& when (@col-7  = true) { .getCols(~'width-xlarge', 1, 7);  }
+	& when (@col-8  = true) { .getCols(~'width-xlarge', 1, 8);  }
+	& when (@col-9  = true) { .getCols(~'width-xlarge', 1, 9);  }
+	& when (@col-12 = true) { .getCols(~'width-xlarge', 1, 12); }
 
 }
 
@@ -354,15 +359,15 @@
 
 @media (min-width: @breakpoint-medium) {
 
-	.getCols(~'push', 1, 7,  ~'left');
-	.getCols(~'push', 1, 8,  ~'left');
-	.getCols(~'push', 1, 9,  ~'left');
-	.getCols(~'push', 1, 12, ~'left');
+	& when (@col-7  = true) { .getCols(~'push', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getCols(~'push', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getCols(~'push', 1, 9,  ~'left'); }
+	& when (@col-12 = true) { .getCols(~'push', 1, 12, ~'left'); }
 	
-	.getColsPP(~'pull', 1, 7,  ~'left');
-	.getColsPP(~'pull', 1, 8,  ~'left');
-	.getColsPP(~'pull', 1, 9,  ~'left');
-	.getColsPP(~'pull', 1, 12, ~'left');
+	& when (@col-7  = true) { .getColsPP(~'pull', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getColsPP(~'pull', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getColsPP(~'pull', 1, 9,  ~'left'); }
+	& when (@col-12 = true) { .getColsPP(~'pull', 1, 12, ~'left'); }
 
 }
 
@@ -385,22 +390,22 @@
 	.getCols(~'large-push', 1, 4,  ~'left');
 	.getCols(~'large-push', 1, 5,  ~'left');
 	.getCols(~'large-push', 1, 6,  ~'left');
-	.getCols(~'large-push', 1, 7,  ~'left');
-	.getCols(~'large-push', 1, 8,  ~'left');
-	.getCols(~'large-push', 1, 9,  ~'left');
+	& when (@col-7  = true) { .getCols(~'large-push', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getCols(~'large-push', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getCols(~'large-push', 1, 9,  ~'left'); }
 	.getCols(~'large-push', 1, 10, ~'left');
-	.getCols(~'large-push', 1, 12, ~'left');
+	& when (@col-12 = true) { .getCols(~'large-push', 1, 12, ~'left'); }
 	
 	.getColsPP(~'large-pull', 1, 2,  ~'left');
 	.getColsPP(~'large-pull', 1, 3,  ~'left');
 	.getColsPP(~'large-pull', 1, 4,  ~'left');
 	.getColsPP(~'large-pull', 1, 5,  ~'left');
 	.getColsPP(~'large-pull', 1, 6,  ~'left');
-	.getColsPP(~'large-pull', 1, 7,  ~'left');
-	.getColsPP(~'large-pull', 1, 8,  ~'left');
-	.getColsPP(~'large-pull', 1, 9,  ~'left');
+	& when (@col-7  = true) { .getColsPP(~'large-pull', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getColsPP(~'large-pull', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getColsPP(~'large-pull', 1, 9,  ~'left'); }
 	.getColsPP(~'large-pull', 1, 10, ~'left');
-	.getColsPP(~'large-pull', 1, 12, ~'left');
+	& when (@col-12 = true) { .getColsPP(~'large-pull', 1, 12, ~'left'); }
 
 }
 
@@ -422,22 +427,22 @@
 	.getCols(~'xlarge-push', 1, 4,  ~'left');
 	.getCols(~'xlarge-push', 1, 5,  ~'left');
 	.getCols(~'xlarge-push', 1, 6,  ~'left');
-	.getCols(~'xlarge-push', 1, 7,  ~'left');
-	.getCols(~'xlarge-push', 1, 8,  ~'left');
-	.getCols(~'xlarge-push', 1, 9,  ~'left');
+	& when (@col-7  = true) { .getCols(~'xlarge-push', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getCols(~'xlarge-push', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getCols(~'xlarge-push', 1, 9,  ~'left'); }
 	.getCols(~'xlarge-push', 1, 10, ~'left');
-	.getCols(~'xlarge-push', 1, 12, ~'left');
+	& when (@col-12 = true) { .getCols(~'xlarge-push', 1, 12, ~'left'); }
 	
 	.getColsPP(~'xlarge-pull', 1, 2,  ~'left');
 	.getColsPP(~'xlarge-pull', 1, 3,  ~'left');
 	.getColsPP(~'xlarge-pull', 1, 4,  ~'left');
 	.getColsPP(~'xlarge-pull', 1, 5,  ~'left');
 	.getColsPP(~'xlarge-pull', 1, 6,  ~'left');
-	.getColsPP(~'xlarge-pull', 1, 7,  ~'left');
-	.getColsPP(~'xlarge-pull', 1, 8,  ~'left');
-	.getColsPP(~'xlarge-pull', 1, 9,  ~'left');
+	& when (@col-7  = true) { .getColsPP(~'xlarge-pull', 1, 7,  ~'left'); }
+	& when (@col-8  = true) { .getColsPP(~'xlarge-pull', 1, 8,  ~'left'); }
+	& when (@col-9  = true) { .getColsPP(~'xlarge-pull', 1, 9,  ~'left'); }
 	.getColsPP(~'xlarge-pull', 1, 10, ~'left');
-	.getColsPP(~'xlarge-pull', 1, 12, ~'left');
+	& when (@col-12 = true) { .getColsPP(~'xlarge-pull', 1, 12, ~'left'); }
 
 }
 
