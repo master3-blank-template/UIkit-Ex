@@ -2,7 +2,7 @@
 
 # uikit-ex
 
-Less &amp; CSS extension framework UiKit, grid columns 7, 8, 9, 10 (for uikit3) and 12 columns
+LESS &amp; SCSS (uikit3 only) &amp; CSS extension framework UiKit, grid columns 7, 8, 9, 10 (uikit3 only) and 12 columns
 
 ### grid-ex-uikit2 (deprecated)
 
