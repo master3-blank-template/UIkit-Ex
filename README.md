@@ -19,7 +19,7 @@ Add components `uk-push-*` and `uk-pull-*`
   <b>UIkit is an Open Source project developed by YOOtheme.</b>
   <br><br>
   <a href="https://yootheme.com" align="center">
-      <img width="134" height="30" src="http://yootheme.com/pro/images/logo.svg">
+      <img width="134" height="30" src="http://yootheme.com/site/images/yootheme-logo.svg">
   </a>
 </p>
 
