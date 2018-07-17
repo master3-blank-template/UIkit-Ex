@@ -6,12 +6,13 @@ LESS &amp; SCSS (uikit3 only) &amp; CSS extension framework UiKit, grid columns 
 
 ### grid-ex-uikit2 (deprecated)
 
-Extension components `uk-width -*`, `uk-push -*`, `uk-pull-*` and modifier `uk-grid-width-*` with the purpose of providing full mesh on 7, 8, 9, and 12 columns, also columns of variable width (auto expand).
+Extension components `uk-width -*`, `uk-push -*`, `uk-pull-*` and modifier `uk-grid-width-*` with the purpose of providing full mesh on 7, 8, 9, and 12 columns, also columns of variable width (auto & expand).
 
 ### width-ex-uikit3
 
-Extension components `uk-width-*` and `uk-child-width-*` with the purpose of providing full mesh on 7, 8, 9, 10, and 12 columns.
-Add components `uk-push-*` and `uk-pull-*`
+Extension components `uk-width-*` and `uk-child-width-*` with the purpose of providing full mesh on 1-30 columns.
+Add components `uk-push-*` and `uk-pull-*`.
+This component completely replaces the original component `width`.
 
 ---
 
