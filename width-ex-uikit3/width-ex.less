@@ -102,11 +102,17 @@
 		@{cl}@{i}-@{c} { .getProperty(@i, @c, @val, @m); }
 	}
 	
-	.getCols(@cl, @i + 1, @c, @sfx, @val, @m);
+	.getCols(@cl, @c, @sfx, @val, @m, @i + 1);
 }
 
-.generate-columns(@cl, @sfx: none, @val: ~'width', @m: false, @i: 7) when (@i =< 30) {
+.generate-columns(@cl, @sfx: none, @val: ~'width', @m: false, @i: 2) when (@i =< 30) {
 
+	@col-2: true;
+	@col-3: true;
+	@col-4: true;
+	@col-5: true;
+	@col-6: true;
+	
 	@col: 'col-@{i}';
 
 	& when (@@col = true) {
@@ -285,11 +291,6 @@
 }
 
 .uk-width-1-1 { width: 100%; }
-.getCols(~'.uk-width-', 2);
-.getCols(~'.uk-width-', 3);
-.getCols(~'.uk-width-', 4);
-.getCols(~'.uk-width-', 5);
-.getCols(~'.uk-width-', 6);
 .generate-columns(~'.uk-width-');
 
 /* Old phone landscape and bigger */
@@ -312,11 +313,6 @@
 	}
 	
 	.uk-width-1-1\@xs { width: 100%; }
-	.getCols(~'.uk-width-', 2, ~'\@xs');
-	.getCols(~'.uk-width-', 3, ~'\@xs');
-	.getCols(~'.uk-width-', 4, ~'\@xs');
-	.getCols(~'.uk-width-', 5, ~'\@xs');
-	.getCols(~'.uk-width-', 6, ~'\@xs');
 	.generate-columns(~'.uk-width-', ~'\@xs');
 
 }
@@ -341,11 +337,6 @@
 	}
 	
 	.uk-width-1-1\@s { width: 100%; }
-	.getCols(~'.uk-width-', 2, ~'\@s');
-	.getCols(~'.uk-width-', 3, ~'\@s');
-	.getCols(~'.uk-width-', 4, ~'\@s');
-	.getCols(~'.uk-width-', 5, ~'\@s');
-	.getCols(~'.uk-width-', 6, ~'\@s');
 	.generate-columns(~'.uk-width-', ~'\@s');
 
 }
@@ -370,11 +361,6 @@
 	}
 	
 	.uk-width-1-1\@m { width: 100%; }
-	.getCols(~'.uk-width-', 2, ~'\@m');
-	.getCols(~'.uk-width-', 3, ~'\@m');
-	.getCols(~'.uk-width-', 4, ~'\@m');
-	.getCols(~'.uk-width-', 5, ~'\@m');
-	.getCols(~'.uk-width-', 6, ~'\@m');
 	.generate-columns(~'.uk-width-', ~'\@m');
 
 }
@@ -399,11 +385,6 @@
 	}
 	
 	.uk-width-1-1\@l { width: 100%; }
-	.getCols(~'.uk-width-', 2, ~'\@l');
-	.getCols(~'.uk-width-', 3, ~'\@l');
-	.getCols(~'.uk-width-', 4, ~'\@l');
-	.getCols(~'.uk-width-', 5, ~'\@l');
-	.getCols(~'.uk-width-', 6, ~'\@l');
 	.generate-columns(~'.uk-width-', ~'\@l');
 
 }
@@ -428,11 +409,6 @@
 	}
 	
 	.uk-width-1-1\@xl { width: 100%; }
-	.getCols(~'.uk-width-', 2, ~'\@xl');
-	.getCols(~'.uk-width-', 3, ~'\@xl');
-	.getCols(~'.uk-width-', 4, ~'\@xl');
-	.getCols(~'.uk-width-', 5, ~'\@xl');
-	.getCols(~'.uk-width-', 6, ~'\@xl');
 	.generate-columns(~'.uk-width-', ~'\@xl');
 
 }
@@ -447,12 +423,6 @@
 	{
 		position: relative;
 	}
-	
-	.getCols(~'.uk-push-', 2, none, ~'left');
-	.getCols(~'.uk-push-', 3, none, ~'left');
-	.getCols(~'.uk-push-', 4, none, ~'left');
-	.getCols(~'.uk-push-', 5, none, ~'left');
-	.getCols(~'.uk-push-', 6, none, ~'left');
 	.generate-columns(~'.uk-push-', none, ~'left');
 	
 }
@@ -463,12 +433,6 @@
 	{
 		position: relative;
 	}
-	
-	.getCols(~'.uk-pull-', 2, none, ~'left', true);
-	.getCols(~'.uk-pull-', 3, none, ~'left', true);
-	.getCols(~'.uk-pull-', 4, none, ~'left', true);
-	.getCols(~'.uk-pull-', 5, none, ~'left', true);
-	.getCols(~'.uk-pull-', 6, none, ~'left', true);
 	.generate-columns(~'.uk-pull-', none, ~'left', true);
 	
 }
@@ -477,25 +441,11 @@
 @media (min-width: @breakpoint-xsmall) {
 	
 	& when (@push  = true) {
-		
-		.getCols(~'.uk-push-', 2, ~'\@xs', ~'left');
-		.getCols(~'.uk-push-', 3, ~'\@xs', ~'left');
-		.getCols(~'.uk-push-', 4, ~'\@xs', ~'left');
-		.getCols(~'.uk-push-', 5, ~'\@xs', ~'left');
-		.getCols(~'.uk-push-', 6, ~'\@xs', ~'left');
 		.generate-columns(~'.uk-push-', ~'\@xs', ~'left');
-		
 	}
 	
 	& when (@pull  = true) {
-		
-		.getCols(~'.uk-pull-', 2, ~'\@xs', ~'left', true);
-		.getCols(~'.uk-pull-', 3, ~'\@xs', ~'left', true);
-		.getCols(~'.uk-pull-', 4, ~'\@xs', ~'left', true);
-		.getCols(~'.uk-pull-', 5, ~'\@xs', ~'left', true);
-		.getCols(~'.uk-pull-', 6, ~'\@xs', ~'left', true);
 		.generate-columns(~'.uk-pull-', ~'\@xs', ~'left', true);
-		
 	}
 	
 }
@@ -504,25 +454,11 @@
 @media (min-width: @breakpoint-small) {
 	
 	& when (@push  = true) {
-		
-		.getCols(~'.uk-push-', 2, ~'\@s', ~'left');
-		.getCols(~'.uk-push-', 3, ~'\@s', ~'left');
-		.getCols(~'.uk-push-', 4, ~'\@s', ~'left');
-		.getCols(~'.uk-push-', 5, ~'\@s', ~'left');
-		.getCols(~'.uk-push-', 6, ~'\@s', ~'left');
 		.generate-columns(~'.uk-push-', ~'\@s', ~'left');
-		
 	}
 	
 	& when (@pull  = true) {
-		
-		.getCols(~'.uk-pull-', 2, ~'\@s', ~'left', true);
-		.getCols(~'.uk-pull-', 3, ~'\@s', ~'left', true);
-		.getCols(~'.uk-pull-', 4, ~'\@s', ~'left', true);
-		.getCols(~'.uk-pull-', 5, ~'\@s', ~'left', true);
-		.getCols(~'.uk-pull-', 6, ~'\@s', ~'left', true);
 		.generate-columns(~'.uk-pull-', ~'\@s', ~'left', true);
-		
 	}
 	
 }
@@ -531,25 +467,11 @@
 @media (min-width: @breakpoint-medium) {
 
 	& when (@push  = true) {
-
-		.getCols(~'.uk-push-', 2, ~'\@m', ~'left');
-		.getCols(~'.uk-push-', 3, ~'\@m', ~'left');
-		.getCols(~'.uk-push-', 4, ~'\@m', ~'left');
-		.getCols(~'.uk-push-', 5, ~'\@m', ~'left');
-		.getCols(~'.uk-push-', 6, ~'\@m', ~'left');
 		.generate-columns(~'.uk-push-', ~'\@m', ~'left');
-
 	}
 
 	& when (@pull  = true) {
-
-		.getCols(~'.uk-pull-', 2, ~'\@m', ~'left', true);
-		.getCols(~'.uk-pull-', 3, ~'\@m', ~'left', true);
-		.getCols(~'.uk-pull-', 4, ~'\@m', ~'left', true);
-		.getCols(~'.uk-pull-', 5, ~'\@m', ~'left', true);
-		.getCols(~'.uk-pull-', 6, ~'\@m', ~'left', true);
 		.generate-columns(~'.uk-pull-', ~'\@m', ~'left', true);
-
 	}
 
 }
@@ -558,25 +480,11 @@
 @media (min-width: @breakpoint-large) {
 
 	& when (@push  = true) {
-
-		.getCols(~'.uk-push-', 2, ~'\@l', ~'left');
-		.getCols(~'.uk-push-', 3, ~'\@l', ~'left');
-		.getCols(~'.uk-push-', 4, ~'\@l', ~'left');
-		.getCols(~'.uk-push-', 5, ~'\@l', ~'left');
-		.getCols(~'.uk-push-', 6, ~'\@l', ~'left');
 		.generate-columns(~'.uk-push-', ~'\@l', ~'left');
-
 	}
 
 	& when (@pull  = true) {
-
-		.getCols(~'.uk-pull-', 2, ~'\@l', ~'left', true);
-		.getCols(~'.uk-pull-', 3, ~'\@l', ~'left', true);
-		.getCols(~'.uk-pull-', 4, ~'\@l', ~'left', true);
-		.getCols(~'.uk-pull-', 5, ~'\@l', ~'left', true);
-		.getCols(~'.uk-pull-', 6, ~'\@l', ~'left', true);
 		.generate-columns(~'.uk-pull-', ~'\@l', ~'left', true);
-
 	}
 
 }
@@ -585,25 +493,11 @@
 @media (min-width: @breakpoint-xlarge) {
 
 	& when (@push  = true) {
-
-		.getCols(~'.uk-push-', 2, ~'\@xl', ~'left');
-		.getCols(~'.uk-push-', 3, ~'\@xl', ~'left');
-		.getCols(~'.uk-push-', 4, ~'\@xl', ~'left');
-		.getCols(~'.uk-push-', 5, ~'\@xl', ~'left');
-		.getCols(~'.uk-push-', 6, ~'\@xl', ~'left');
 		.generate-columns(~'.uk-push-', ~'\@xl', ~'left');
-
 	}
 
 	& when (@pull  = true) {
-
-		.getCols(~'.uk-pull-', 2, ~'\@xl', ~'left', true);
-		.getCols(~'.uk-pull-', 3, ~'\@xl', ~'left', true);
-		.getCols(~'.uk-pull-', 4, ~'\@xl', ~'left', true);
-		.getCols(~'.uk-pull-', 5, ~'\@xl', ~'left', true);
-		.getCols(~'.uk-pull-', 6, ~'\@xl', ~'left', true);
 		.generate-columns(~'.uk-pull-', ~'\@xl', ~'left', true);
-
 	}
 
 }
