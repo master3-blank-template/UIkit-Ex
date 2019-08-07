@@ -18,16 +18,16 @@ $breakpoint-xsmall-max:                         ($breakpoint-small - 1) !default
 $breakpoint-small-max:                          ($breakpoint-medium - 1) !default;
 $breakpoint-medium-max:                         ($breakpoint-large - 1) !default;
 $breakpoint-large-max:                          ($breakpoint-xlarge - 1) !default;
-*/
-
-$breakpoint-xsmall:                             480px !default;  // Phone landscape
-$breakpoint-xxsmall-max:                        ($breakpoint-xsmall - 1) !default;
 
 $width-small-width:                             150px !default;
 $width-medium-width:                            300px !default;
 $width-large-width:                             450px !default;
 $width-xlarge-width:                            600px !default;
 $width-xxlarge-width:                           750px !default;
+*/
+
+$breakpoint-xsmall:                             480px !default;  // Phone landscape
+$breakpoint-xxsmall-max:                        ($breakpoint-xsmall - 1) !default;
 
 
 /* ========================================================================
