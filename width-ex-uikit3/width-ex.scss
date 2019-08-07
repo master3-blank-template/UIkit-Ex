@@ -8,7 +8,7 @@
 //
 // ========================================================================
 
-/*
+/* Copy of variables from "variables.scss"
 $breakpoint-small:                              640px !default;  // Phone landscape
 $breakpoint-medium:                             960px !default;  // Tablet Landscape
 $breakpoint-large:                              1200px !default; // Desktop
@@ -66,19 +66,55 @@ $push:                                          true;
 /* Mixins
  ========================================================================== */
 
-@mixin  getProperty($col: 1, $cols: 1, $val: 'width', $m: false)
+@mixin getProperty($col: 1, $cols: 1, $val: 'width', $m: false)
 {
 	$v: floor( $col * (100% / $cols) * 1000 ) / 1000;
 	@if $m == true { #{$val}: -$v; } @else { #{$val}: $v; }
 }
 
-@mixin getCols($cl, $i, $c, $sfx: '', $val: 'width', $m: false)
+@mixin generate-column($cl, $sfx: '', $i: 2)
 {
+	$col-2: true;
+	$col-3: true;
+	$col-4: true;
+	$col-5: true;
+	$col-6: true;
+	
+	$col: 'col-';
+	
+	@while $i <= 30
+	{
+		@if $col$i == true { #{$cl}#{$i}#{$sfx} > * { @include getProperty(1, $i); } }
+		$i: $i + 1;
+	}
+}
+
+@mixin getCols($cl, $c, $sfx: '', $val: 'width', $m: false)
+{
+	$i: 1;
+	
 	@while $i < $c
 	{
 		.uk-#{$cl}-#{$i}-#{$c}#{$sfx} { @include getProperty($i, $c, $val, $m); }
 		$i: $i + 1;
 	} 
+}
+
+@mixin generate-columns($cl, $sfx: '', $val: 'width', $m: false, $c: 2)
+{
+	$col-2: true;
+	$col-3: true;
+	$col-4: true;
+	$col-5: true;
+	$col-6: true;
+	
+	$col: 'col-';
+
+	@while $c <= 30
+	{
+		@if $col$c == true { @include getCols($cl, $c, $sfx, $val, $m); }
+		$c: $c + 1;
+	}
 }
 
 
@@ -99,35 +135,7 @@ $push:                                          true;
 }
 
 .uk-child-width-1-1 > * { width: 100%; }
-.uk-child-width-1-2 > * { @include getProperty(1,2); }
-.uk-child-width-1-3 > * { @include getProperty(1,3); }
-.uk-child-width-1-4 > * { @include getProperty(1,4); }
-.uk-child-width-1-5 > * { @include getProperty(1,5); }
-.uk-child-width-1-6 > * { @include getProperty(1,6); }
-@if $col-7  { .uk-child-width-1-7 > *  { @include getProperty(1,7); }  }
-@if $col-8  { .uk-child-width-1-8 > *  { @include getProperty(1,8); }  }
-@if $col-9  { .uk-child-width-1-9 > *  { @include getProperty(1,9); }  }
-@if $col-10 { .uk-child-width-1-10 > * { @include getProperty(1,10); } }
-@if $col-11 { .uk-child-width-1-11 > * { @include getProperty(1,11); } }
-@if $col-12 { .uk-child-width-1-12 > * { @include getProperty(1,12); } }
-@if $col-13 { .uk-child-width-1-13 > * { @include getProperty(1,13); } }
-@if $col-14 { .uk-child-width-1-14 > * { @include getProperty(1,14); } }
-@if $col-15 { .uk-child-width-1-15 > * { @include getProperty(1,15); } }
-@if $col-16 { .uk-child-width-1-16 > * { @include getProperty(1,16); } }
-@if $col-17 { .uk-child-width-1-17 > * { @include getProperty(1,17); } }
-@if $col-18 { .uk-child-width-1-18 > * { @include getProperty(1,18); } }
-@if $col-19 { .uk-child-width-1-19 > * { @include getProperty(1,19); } }
-@if $col-20 { .uk-child-width-1-20 > * { @include getProperty(1,20); } }
-@if $col-21 { .uk-child-width-1-21 > * { @include getProperty(1,21); } }
-@if $col-22 { .uk-child-width-1-22 > * { @include getProperty(1,22); } }
-@if $col-23 { .uk-child-width-1-23 > * { @include getProperty(1,23); } }
-@if $col-24 { .uk-child-width-1-24 > * { @include getProperty(1,24); } }
-@if $col-25 { .uk-child-width-1-25 > * { @include getProperty(1,25); } }
-@if $col-26 { .uk-child-width-1-26 > * { @include getProperty(1,26); } }
-@if $col-27 { .uk-child-width-1-27 > * { @include getProperty(1,27); } }
-@if $col-28 { .uk-child-width-1-28 > * { @include getProperty(1,28); } }
-@if $col-29 { .uk-child-width-1-29 > * { @include getProperty(1,29); } }
-@if $col-30 { .uk-child-width-1-30 > * { @include getProperty(1,30); } }
+@include generate-column('.uk-child-width-1-');
 
 /* Old phone landscape and bigger */
 @media (min-width: $breakpoint-xsmall) {
@@ -141,35 +149,7 @@ $push:                                          true;
 	}
 	
 	.uk-child-width-1-1\@xs > * { width: 100%; }
-	.uk-child-width-1-2\@xs > * { @include getProperty(1,2); }
-	.uk-child-width-1-3\@xs > * { @include getProperty(1,3); }
-	.uk-child-width-1-4\@xs > * { @include getProperty(1,4); }
-	.uk-child-width-1-5\@xs > * { @include getProperty(1,5); }
-	.uk-child-width-1-6\@xs > * { @include getProperty(1,6); }
-	@if $col-7  {  .uk-child-width-1-7\@xs > * { @include getProperty(1,7); }  }
-	@if $col-8  {  .uk-child-width-1-8\@xs > * { @include getProperty(1,8); }  }
-	@if $col-9  {  .uk-child-width-1-9\@xs > * { @include getProperty(1,9); }  }
-	@if $col-10 { .uk-child-width-1-10\@xs > * { @include getProperty(1,10); } }
-	@if $col-11 { .uk-child-width-1-10\@xs > * { @include getProperty(1,11); } }
-	@if $col-12 { .uk-child-width-1-12\@xs > * { @include getProperty(1,12); } }
-	@if $col-13 { .uk-child-width-1-13\@xs > * { @include getProperty(1,13); } }
-	@if $col-14 { .uk-child-width-1-14\@xs > * { @include getProperty(1,14); } }
-	@if $col-15 { .uk-child-width-1-15\@xs > * { @include getProperty(1,15); } }
-	@if $col-16 { .uk-child-width-1-16\@xs > * { @include getProperty(1,16); } }
-	@if $col-17 { .uk-child-width-1-17\@xs > * { @include getProperty(1,17); } }
-	@if $col-18 { .uk-child-width-1-18\@xs > * { @include getProperty(1,18); } }
-	@if $col-19 { .uk-child-width-1-19\@xs > * { @include getProperty(1,19); } }
-	@if $col-20 { .uk-child-width-1-20\@xs > * { @include getProperty(1,20); } }
-	@if $col-21 { .uk-child-width-1-21\@xs > * { @include getProperty(1,21); } }
-	@if $col-22 { .uk-child-width-1-22\@xs > * { @include getProperty(1,22); } }
-	@if $col-23 { .uk-child-width-1-23\@xs > * { @include getProperty(1,23); } }
-	@if $col-24 { .uk-child-width-1-24\@xs > * { @include getProperty(1,24); } }
-	@if $col-25 { .uk-child-width-1-25\@xs > * { @include getProperty(1,25); } }
-	@if $col-26 { .uk-child-width-1-26\@xs > * { @include getProperty(1,26); } }
-	@if $col-27 { .uk-child-width-1-27\@xs > * { @include getProperty(1,27); } }
-	@if $col-28 { .uk-child-width-1-28\@xs > * { @include getProperty(1,28); } }
-	@if $col-29 { .uk-child-width-1-29\@xs > * { @include getProperty(1,29); } }
-	@if $col-30 { .uk-child-width-1-30\@xs > * { @include getProperty(1,30); } }
+	@include generate-column('.uk-child-width-1-', '\\@xs');
 	
 }
 
@@ -185,36 +165,7 @@ $push:                                          true;
 	}
 	
 	.uk-child-width-1-1\@s > * { width: 100%; }
-	.uk-child-width-1-2\@s > * { @include getProperty(1,2); }
-	.uk-child-width-1-3\@s > * { @include getProperty(1,3); }
-	.uk-child-width-1-4\@s > * { @include getProperty(1,4); }
-	.uk-child-width-1-5\@s > * { @include getProperty(1,5); }
-	.uk-child-width-1-6\@s > * { @include getProperty(1,6); }
-	@if $col-7  {  .uk-child-width-1-7\@s > * { @include getProperty(1,7); }  }
-	@if $col-8  {  .uk-child-width-1-8\@s > * { @include getProperty(1,8); }  }
-	@if $col-9  {  .uk-child-width-1-9\@s > * { @include getProperty(1,9); }  }
-	@if $col-10 { .uk-child-width-1-10\@s > * { @include getProperty(1,10); } }
-	@if $col-11 { .uk-child-width-1-11\@s > * { @include getProperty(1,11); } }
-	@if $col-12 { .uk-child-width-1-12\@s > * { @include getProperty(1,12); } }
-	@if $col-13 { .uk-child-width-1-13\@s > * { @include getProperty(1,13); } }
-	@if $col-14 { .uk-child-width-1-14\@s > * { @include getProperty(1,14); } }
-	@if $col-15 { .uk-child-width-1-15\@s > * { @include getProperty(1,15); } }
-	@if $col-16 { .uk-child-width-1-16\@s > * { @include getProperty(1,16); } }
-	@if $col-17 { .uk-child-width-1-17\@s > * { @include getProperty(1,17); } }
-	@if $col-18 { .uk-child-width-1-18\@s > * { @include getProperty(1,18); } }
-	@if $col-19 { .uk-child-width-1-19\@s > * { @include getProperty(1,19); } }
-	@if $col-20 { .uk-child-width-1-20\@s > * { @include getProperty(1,20); } }
-	@if $col-21 { .uk-child-width-1-21\@s > * { @include getProperty(1,21); } }
-	@if $col-22 { .uk-child-width-1-22\@s > * { @include getProperty(1,22); } }
-	@if $col-23 { .uk-child-width-1-23\@s > * { @include getProperty(1,23); } }
-	@if $col-24 { .uk-child-width-1-24\@s > * { @include getProperty(1,24); } }
-	@if $col-25 { .uk-child-width-1-25\@s > * { @include getProperty(1,25); } }
-	@if $col-26 { .uk-child-width-1-26\@s > * { @include getProperty(1,26); } }
-	@if $col-27 { .uk-child-width-1-27\@s > * { @include getProperty(1,27); } }
-	@if $col-28 { .uk-child-width-1-28\@s > * { @include getProperty(1,28); } }
-	@if $col-29 { .uk-child-width-1-29\@s > * { @include getProperty(1,29); } }
-	@if $col-30 { .uk-child-width-1-30\@s > * { @include getProperty(1,30); } }
-	
+	@include generate-column('.uk-child-width-1-', '\\@s');
 }
 
 /* Tablet landscape and bigger */
@@ -229,36 +180,7 @@ $push:                                          true;
 	}
 	
 	.uk-child-width-1-1\@m > * { width: 100%; }
-	.uk-child-width-1-2\@m > * { @include getProperty(1,2); }
-	.uk-child-width-1-3\@m > * { @include getProperty(1,3); }
-	.uk-child-width-1-4\@m > * { @include getProperty(1,4); }
-	.uk-child-width-1-5\@m > * { @include getProperty(1,5); }
-	.uk-child-width-1-6\@m > * { @include getProperty(1,6); }
-	@if $col-7  {  .uk-child-width-1-7\@m > * { @include getProperty(1,7); }  }
-	@if $col-8  {  .uk-child-width-1-8\@m > * { @include getProperty(1,8); }  }
-	@if $col-9  {  .uk-child-width-1-9\@m > * { @include getProperty(1,9); }  }
-	@if $col-10 { .uk-child-width-1-10\@m > * { @include getProperty(1,10); } }
-	@if $col-11 { .uk-child-width-1-11\@m > * { @include getProperty(1,11); } }
-	@if $col-12 { .uk-child-width-1-12\@m > * { @include getProperty(1,12); } }
-	@if $col-13 { .uk-child-width-1-13\@m > * { @include getProperty(1,13); } }
-	@if $col-14 { .uk-child-width-1-14\@m > * { @include getProperty(1,14); } }
-	@if $col-15 { .uk-child-width-1-15\@m > * { @include getProperty(1,15); } }
-	@if $col-16 { .uk-child-width-1-16\@m > * { @include getProperty(1,16); } }
-	@if $col-17 { .uk-child-width-1-17\@m > * { @include getProperty(1,17); } }
-	@if $col-18 { .uk-child-width-1-18\@m > * { @include getProperty(1,18); } }
-	@if $col-19 { .uk-child-width-1-19\@m > * { @include getProperty(1,19); } }
-	@if $col-20 { .uk-child-width-1-20\@m > * { @include getProperty(1,20); } }
-	@if $col-21 { .uk-child-width-1-21\@m > * { @include getProperty(1,21); } }
-	@if $col-22 { .uk-child-width-1-22\@m > * { @include getProperty(1,22); } }
-	@if $col-23 { .uk-child-width-1-23\@m > * { @include getProperty(1,23); } }
-	@if $col-24 { .uk-child-width-1-24\@m > * { @include getProperty(1,24); } }
-	@if $col-25 { .uk-child-width-1-25\@m > * { @include getProperty(1,25); } }
-	@if $col-26 { .uk-child-width-1-26\@m > * { @include getProperty(1,26); } }
-	@if $col-27 { .uk-child-width-1-27\@m > * { @include getProperty(1,27); } }
-	@if $col-28 { .uk-child-width-1-28\@m > * { @include getProperty(1,28); } }
-	@if $col-29 { .uk-child-width-1-29\@m > * { @include getProperty(1,29); } }
-	@if $col-30 { .uk-child-width-1-30\@m > * { @include getProperty(1,30); } }
-	
+	@include generate-column('.uk-child-width-1-', '\\@m');
 }
 
 /* Desktop and bigger */
@@ -273,36 +195,7 @@ $push:                                          true;
 	}
 	
 	.uk-child-width-1-1\@l > * { width: 100%; }
-	.uk-child-width-1-2\@l > * { @include getProperty(1,2); }
-	.uk-child-width-1-3\@l > * { @include getProperty(1,3); }
-	.uk-child-width-1-4\@l > * { @include getProperty(1,4); }
-	.uk-child-width-1-5\@l > * { @include getProperty(1,5); }
-	.uk-child-width-1-6\@l > * { @include getProperty(1,6); }
-	@if $col-7  {  .uk-child-width-1-7\@l > * { @include getProperty(1,7); }  }
-	@if $col-8  {  .uk-child-width-1-8\@l > * { @include getProperty(1,8); }  }
-	@if $col-9  {  .uk-child-width-1-9\@l > * { @include getProperty(1,9); }  }
-	@if $col-10 { .uk-child-width-1-10\@l > * { @include getProperty(1,10); } }
-	@if $col-11 { .uk-child-width-1-11\@l > * { @include getProperty(1,11); } }
-	@if $col-12 { .uk-child-width-1-12\@l > * { @include getProperty(1,12); } }
-	@if $col-13 { .uk-child-width-1-13\@l > * { @include getProperty(1,13); } }
-	@if $col-14 { .uk-child-width-1-14\@l > * { @include getProperty(1,14); } }
-	@if $col-15 { .uk-child-width-1-15\@l > * { @include getProperty(1,15); } }
-	@if $col-16 { .uk-child-width-1-16\@l > * { @include getProperty(1,16); } }
-	@if $col-17 { .uk-child-width-1-17\@l > * { @include getProperty(1,17); } }
-	@if $col-18 { .uk-child-width-1-18\@l > * { @include getProperty(1,18); } }
-	@if $col-19 { .uk-child-width-1-19\@l > * { @include getProperty(1,19); } }
-	@if $col-20 { .uk-child-width-1-20\@l > * { @include getProperty(1,20); } }
-	@if $col-21 { .uk-child-width-1-21\@l > * { @include getProperty(1,21); } }
-	@if $col-22 { .uk-child-width-1-22\@l > * { @include getProperty(1,22); } }
-	@if $col-23 { .uk-child-width-1-23\@l > * { @include getProperty(1,23); } }
-	@if $col-24 { .uk-child-width-1-24\@l > * { @include getProperty(1,24); } }
-	@if $col-25 { .uk-child-width-1-25\@l > * { @include getProperty(1,25); } }
-	@if $col-26 { .uk-child-width-1-26\@l > * { @include getProperty(1,26); } }
-	@if $col-27 { .uk-child-width-1-27\@l > * { @include getProperty(1,27); } }
-	@if $col-28 { .uk-child-width-1-28\@l > * { @include getProperty(1,28); } }
-	@if $col-29 { .uk-child-width-1-29\@l > * { @include getProperty(1,29); } }
-	@if $col-30 { .uk-child-width-1-30\@l > * { @include getProperty(1,30); } }
-	
+	@include generate-column('.uk-child-width-1-', '\\@l');
 }
 
 /* Large screen and bigger */
@@ -317,36 +210,7 @@ $push:                                          true;
 	}
 	
 	.uk-child-width-1-1\@xl > * { width: 100%; }
-	.uk-child-width-1-2\@xl > * { @include getProperty(1,2); }
-	.uk-child-width-1-3\@xl > * { @include getProperty(1,3); }
-	.uk-child-width-1-4\@xl > * { @include getProperty(1,4); }
-	.uk-child-width-1-5\@xl > * { @include getProperty(1,5); }
-	.uk-child-width-1-6\@xl > * { @include getProperty(1,6); }
-	@if $col-7  {  .uk-child-width-1-7\@xl > * { @include getProperty(1,7); }  }
-	@if $col-8  {  .uk-child-width-1-8\@xl > * { @include getProperty(1,8); }  }
-	@if $col-9  {  .uk-child-width-1-9\@xl > * { @include getProperty(1,9); }  }
-	@if $col-10 { .uk-child-width-1-10\@xl > * { @include getProperty(1,10); } }
-	@if $col-11 { .uk-child-width-1-11\@xl > * { @include getProperty(1,11); } }
-	@if $col-12 { .uk-child-width-1-12\@xl > * { @include getProperty(1,12); } }
-	@if $col-13 { .uk-child-width-1-13\@xl > * { @include getProperty(1,13); } }
-	@if $col-14 { .uk-child-width-1-14\@xl > * { @include getProperty(1,14); } }
-	@if $col-15 { .uk-child-width-1-15\@xl > * { @include getProperty(1,15); } }
-	@if $col-16 { .uk-child-width-1-16\@xl > * { @include getProperty(1,16); } }
-	@if $col-17 { .uk-child-width-1-17\@xl > * { @include getProperty(1,17); } }
-	@if $col-18 { .uk-child-width-1-18\@xl > * { @include getProperty(1,18); } }
-	@if $col-19 { .uk-child-width-1-19\@xl > * { @include getProperty(1,19); } }
-	@if $col-20 { .uk-child-width-1-20\@xl > * { @include getProperty(1,20); } }
-	@if $col-21 { .uk-child-width-1-21\@xl > * { @include getProperty(1,21); } }
-	@if $col-22 { .uk-child-width-1-22\@xl > * { @include getProperty(1,22); } }
-	@if $col-23 { .uk-child-width-1-23\@xl > * { @include getProperty(1,23); } }
-	@if $col-24 { .uk-child-width-1-24\@xl > * { @include getProperty(1,24); } }
-	@if $col-25 { .uk-child-width-1-25\@xl > * { @include getProperty(1,25); } }
-	@if $col-26 { .uk-child-width-1-26\@xl > * { @include getProperty(1,26); } }
-	@if $col-27 { .uk-child-width-1-27\@xl > * { @include getProperty(1,27); } }
-	@if $col-28 { .uk-child-width-1-28\@xl > * { @include getProperty(1,28); } }
-	@if $col-29 { .uk-child-width-1-29\@xl > * { @include getProperty(1,29); } }
-	@if $col-30 { .uk-child-width-1-30\@xl > * { @include getProperty(1,30); } }
-	
+	@include generate-column('.uk-child-width-1-', '\\@xl');
 }
 
 
@@ -359,6 +223,12 @@ $push:                                          true;
     max-width: 100%;
 }
 
+.uk-width-small { width: $width-small-width; }
+.uk-width-medium { width: $width-medium-width; }
+.uk-width-large { width: $width-large-width; }
+.uk-width-xlarge { width: $width-xlarge-width; }
+.uk-width-xxlarge { width: $width-xxlarge-width; }
+
 .uk-width-auto { width: auto; }
 .uk-width-expand {
     width: 1px;
@@ -368,44 +238,16 @@ $push:                                          true;
 }
 
 .uk-width-1-1 > * { width: 100%; }
-@include getCols('width',1,2);
-@include getCols('width',1,3);
-@include getCols('width',1,4);
-@include getCols('width',1,5);
-@include getCols('width',1,6);
-@if $col-7  { @include getCols('width',1,7);  }
-@if $col-8  { @include getCols('width',1,8);  }
-@if $col-9  { @include getCols('width',1,9);  }
-@if $col-10 { @include getCols('width',1,10); }
-@if $col-11 { @include getCols('width',1,11); }
-@if $col-12 { @include getCols('width',1,12); }
-@if $col-13 { @include getCols('width',1,13); }
-@if $col-14 { @include getCols('width',1,14); }
-@if $col-15 { @include getCols('width',1,15); }
-@if $col-16 { @include getCols('width',1,16); }
-@if $col-17 { @include getCols('width',1,17); }
-@if $col-18 { @include getCols('width',1,18); }
-@if $col-19 { @include getCols('width',1,19); }
-@if $col-20 { @include getCols('width',1,20); }
-@if $col-21 { @include getCols('width',1,21); }
-@if $col-22 { @include getCols('width',1,22); }
-@if $col-23 { @include getCols('width',1,23); }
-@if $col-24 { @include getCols('width',1,24); }
-@if $col-25 { @include getCols('width',1,25); }
-@if $col-26 { @include getCols('width',1,26); }
-@if $col-27 { @include getCols('width',1,27); }
-@if $col-28 { @include getCols('width',1,28); }
-@if $col-29 { @include getCols('width',1,29); }
-@if $col-30 { @include getCols('width',1,30); }
-
-.uk-width-small { width: $width-small-width; }
-.uk-width-medium { width: $width-medium-width; }
-.uk-width-large { width: $width-large-width; }
-.uk-width-xlarge { width: $width-xlarge-width; }
-.uk-width-xxlarge { width: $width-xxlarge-width; }
+@include generate-columns('width');
 
 /* Old phone landscape and bigger */
 @media (min-width: $breakpoint-xsmall) {
+	
+	.uk-width-small\@xs { width: $width-small-width; }
+    .uk-width-medium\@xs { width: $width-medium-width; }
+    .uk-width-large\@xs { width: $width-large-width; }
+    .uk-width-xlarge\@xs { width: $width-xlarge-width; }
+    .uk-width-xxlarge\@xs { width: $width-xxlarge-width; }
 	
 	.uk-width-auto\@xs { width: auto; }
 	.uk-width-expand\@xs {
@@ -415,47 +257,19 @@ $push:                                          true;
 		flex-basis: 1px;
 	}
 	
-	.uk-width-1-1\@s > * { width: 100%; }
-	@include getCols('width',1,2,'\\@xs');
-	@include getCols('width',1,3,'\\@xs');
-	@include getCols('width',1,4,'\\@xs');
-	@include getCols('width',1,5,'\\@xs');
-	@include getCols('width',1,6,'\\@xs');
-	@if $col-7  { @include getCols('width',1,7, '\\@xs'); }
-	@if $col-8  { @include getCols('width',1,8, '\\@xs'); }
-	@if $col-9  { @include getCols('width',1,9, '\\@xs'); }
-	@if $col-10 { @include getCols('width',1,10,'\\@xs'); }
-	@if $col-11 { @include getCols('width',1,11,'\\@xs'); }
-	@if $col-12 { @include getCols('width',1,12,'\\@xs'); }
-	@if $col-13 { @include getCols('width',1,13,'\\@xs'); }
-	@if $col-14 { @include getCols('width',1,14,'\\@xs'); }
-	@if $col-15 { @include getCols('width',1,15,'\\@xs'); }
-	@if $col-16 { @include getCols('width',1,16,'\\@xs'); }
-	@if $col-17 { @include getCols('width',1,17,'\\@xs'); }
-	@if $col-18 { @include getCols('width',1,18,'\\@xs'); }
-	@if $col-19 { @include getCols('width',1,19,'\\@xs'); }
-	@if $col-20 { @include getCols('width',1,20,'\\@xs'); }
-	@if $col-21 { @include getCols('width',1,21,'\\@xs'); }
-	@if $col-22 { @include getCols('width',1,22,'\\@xs'); }
-	@if $col-23 { @include getCols('width',1,23,'\\@xs'); }
-	@if $col-24 { @include getCols('width',1,24,'\\@xs'); }
-	@if $col-25 { @include getCols('width',1,25,'\\@xs'); }
-	@if $col-26 { @include getCols('width',1,26,'\\@xs'); }
-	@if $col-27 { @include getCols('width',1,27,'\\@xs'); }
-	@if $col-28 { @include getCols('width',1,28,'\\@xs'); }
-	@if $col-29 { @include getCols('width',1,29,'\\@xs'); }
-	@if $col-30 { @include getCols('width',1,30,'\\@xs'); }
-	
-	.uk-width-small\@xs { width: $width-small-width; }
-    .uk-width-medium\@xs { width: $width-medium-width; }
-    .uk-width-large\@xs { width: $width-large-width; }
-    .uk-width-xlarge\@xs { width: $width-xlarge-width; }
-    .uk-width-xxlarge\@xs { width: $width-xxlarge-width; }
+	.uk-width-1-1\@xs > * { width: 100%; }
+	@include generate-columns('width', '\\@xs');
 	
 }
 
 /* Phone landscape and bigger */
 @media (min-width: $breakpoint-small) {
+	
+	.uk-width-small\@s { width: $width-small-width; }
+    .uk-width-medium\@s { width: $width-medium-width; }
+    .uk-width-large\@s { width: $width-large-width; }
+    .uk-width-xlarge\@s { width: $width-xlarge-width; }
+    .uk-width-xxlarge\@s { width: $width-xxlarge-width; }
 	
 	.uk-width-auto\@s { width: auto; }
 	.uk-width-expand\@s {
@@ -466,46 +280,18 @@ $push:                                          true;
 	}
 	
 	.uk-width-1-1\@s > * { width: 100%; }
-	@include getCols('width',1,2,'\\@s');
-	@include getCols('width',1,3,'\\@s');
-	@include getCols('width',1,4,'\\@s');
-	@include getCols('width',1,5,'\\@s');
-	@include getCols('width',1,6,'\\@s');
-	@if $col-7  { @include getCols('width',1,7, '\\@s'); }
-	@if $col-8  { @include getCols('width',1,8, '\\@s'); }
-	@if $col-9  { @include getCols('width',1,9, '\\@s'); }
-	@if $col-10 { @include getCols('width',1,10,'\\@s'); }
-	@if $col-11 { @include getCols('width',1,11,'\\@s'); }
-	@if $col-12 { @include getCols('width',1,12,'\\@s'); }
-	@if $col-13 { @include getCols('width',1,13,'\\@s'); }
-	@if $col-14 { @include getCols('width',1,14,'\\@s'); }
-	@if $col-15 { @include getCols('width',1,15,'\\@s'); }
-	@if $col-16 { @include getCols('width',1,16,'\\@s'); }
-	@if $col-17 { @include getCols('width',1,17,'\\@s'); }
-	@if $col-18 { @include getCols('width',1,18,'\\@s'); }
-	@if $col-19 { @include getCols('width',1,19,'\\@s'); }
-	@if $col-20 { @include getCols('width',1,20,'\\@s'); }
-	@if $col-21 { @include getCols('width',1,21,'\\@s'); }
-	@if $col-22 { @include getCols('width',1,22,'\\@s'); }
-	@if $col-23 { @include getCols('width',1,23,'\\@s'); }
-	@if $col-24 { @include getCols('width',1,24,'\\@s'); }
-	@if $col-25 { @include getCols('width',1,25,'\\@s'); }
-	@if $col-26 { @include getCols('width',1,26,'\\@s'); }
-	@if $col-27 { @include getCols('width',1,27,'\\@s'); }
-	@if $col-28 { @include getCols('width',1,28,'\\@s'); }
-	@if $col-29 { @include getCols('width',1,29,'\\@s'); }
-	@if $col-30 { @include getCols('width',1,30,'\\@s'); }
-	
-	.uk-width-small\@s { width: $width-small-width; }
-    .uk-width-medium\@s { width: $width-medium-width; }
-    .uk-width-large\@s { width: $width-large-width; }
-    .uk-width-xlarge\@s { width: $width-xlarge-width; }
-    .uk-width-xxlarge\@s { width: $width-xxlarge-width; }
+	@include generate-columns('width', '\\@s');
 	
 }
 
 /* Tablet landscape and bigger */
 @media (min-width: $breakpoint-medium) {
+	
+	.uk-width-small\@m { width: $width-small-width; }
+    .uk-width-medium\@m { width: $width-medium-width; }
+    .uk-width-large\@m { width: $width-large-width; }
+    .uk-width-xlarge\@m { width: $width-xlarge-width; }
+    .uk-width-xxlarge\@m { width: $width-xxlarge-width; }
 	
 	.uk-width-auto\@m { width: auto; }
 	.uk-width-expand\@m {
@@ -516,46 +302,18 @@ $push:                                          true;
 	}
 	
 	.uk-width-1-1\@m > * { width: 100%; }
-	@include getCols('width',1,2,'\\@m');
-	@include getCols('width',1,3,'\\@m');
-	@include getCols('width',1,4,'\\@m');
-	@include getCols('width',1,5,'\\@m');
-	@include getCols('width',1,6,'\\@m');
-	@if $col-7  { @include getCols('width',1,7, '\\@m'); }
-	@if $col-8  { @include getCols('width',1,8, '\\@m'); }
-	@if $col-9  { @include getCols('width',1,9, '\\@m'); }
-	@if $col-10 { @include getCols('width',1,10,'\\@m'); }
-	@if $col-11 { @include getCols('width',1,11,'\\@m'); }
-	@if $col-12 { @include getCols('width',1,12,'\\@m'); }
-	@if $col-13 { @include getCols('width',1,13,'\\@m'); }
-	@if $col-14 { @include getCols('width',1,14,'\\@m'); }
-	@if $col-15 { @include getCols('width',1,15,'\\@m'); }
-	@if $col-16 { @include getCols('width',1,16,'\\@m'); }
-	@if $col-17 { @include getCols('width',1,17,'\\@m'); }
-	@if $col-18 { @include getCols('width',1,18,'\\@m'); }
-	@if $col-19 { @include getCols('width',1,19,'\\@m'); }
-	@if $col-20 { @include getCols('width',1,20,'\\@m'); }
-	@if $col-21 { @include getCols('width',1,21,'\\@m'); }
-	@if $col-22 { @include getCols('width',1,22,'\\@m'); }
-	@if $col-23 { @include getCols('width',1,23,'\\@m'); }
-	@if $col-24 { @include getCols('width',1,24,'\\@m'); }
-	@if $col-25 { @include getCols('width',1,25,'\\@m'); }
-	@if $col-26 { @include getCols('width',1,26,'\\@m'); }
-	@if $col-27 { @include getCols('width',1,27,'\\@m'); }
-	@if $col-28 { @include getCols('width',1,28,'\\@m'); }
-	@if $col-29 { @include getCols('width',1,29,'\\@m'); }
-	@if $col-30 { @include getCols('width',1,30,'\\@m'); }
-	
-	.uk-width-small\@m { width: $width-small-width; }
-    .uk-width-medium\@m { width: $width-medium-width; }
-    .uk-width-large\@m { width: $width-large-width; }
-    .uk-width-xlarge\@m { width: $width-xlarge-width; }
-    .uk-width-xxlarge\@m { width: $width-xxlarge-width; }
+	@include generate-columns('width', '\\@m');
 	
 }
 
 /* Desktop and bigger */
 @media (min-width: $breakpoint-large) {
+	
+	.uk-width-small\@l { width: $width-small-width; }
+    .uk-width-medium\@l { width: $width-medium-width; }
+    .uk-width-large\@l { width: $width-large-width; }
+    .uk-width-xlarge\@l { width: $width-xlarge-width; }
+    .uk-width-xxlarge\@l { width: $width-xxlarge-width; }
 	
 	.uk-width-auto\@l { width: auto; }
 	.uk-width-expand\@l {
@@ -566,46 +324,18 @@ $push:                                          true;
 	}
 	
 	.uk-width-1-1\@l > * { width: 100%; }
-	@include getCols('width',1,2,'\\@l');
-	@include getCols('width',1,3,'\\@l');
-	@include getCols('width',1,4,'\\@l');
-	@include getCols('width',1,5,'\\@l');
-	@include getCols('width',1,6,'\\@l');
-	@if $col-7  { @include getCols('width',1,7, '\\@l'); }
-	@if $col-8  { @include getCols('width',1,8, '\\@l'); }
-	@if $col-9  { @include getCols('width',1,9, '\\@l'); }
-	@if $col-10 { @include getCols('width',1,10,'\\@l'); }
-	@if $col-11 { @include getCols('width',1,11,'\\@l'); }
-	@if $col-12 { @include getCols('width',1,12,'\\@l'); }
-	@if $col-13 { @include getCols('width',1,13,'\\@l'); }
-	@if $col-14 { @include getCols('width',1,14,'\\@l'); }
-	@if $col-15 { @include getCols('width',1,15,'\\@l'); }
-	@if $col-16 { @include getCols('width',1,16,'\\@l'); }
-	@if $col-17 { @include getCols('width',1,17,'\\@l'); }
-	@if $col-18 { @include getCols('width',1,18,'\\@l'); }
-	@if $col-19 { @include getCols('width',1,19,'\\@l'); }
-	@if $col-20 { @include getCols('width',1,20,'\\@l'); }
-	@if $col-21 { @include getCols('width',1,21,'\\@l'); }
-	@if $col-22 { @include getCols('width',1,22,'\\@l'); }
-	@if $col-23 { @include getCols('width',1,23,'\\@l'); }
-	@if $col-24 { @include getCols('width',1,24,'\\@l'); }
-	@if $col-25 { @include getCols('width',1,25,'\\@l'); }
-	@if $col-26 { @include getCols('width',1,26,'\\@l'); }
-	@if $col-27 { @include getCols('width',1,27,'\\@l'); }
-	@if $col-28 { @include getCols('width',1,28,'\\@l'); }
-	@if $col-29 { @include getCols('width',1,29,'\\@l'); }
-	@if $col-30 { @include getCols('width',1,30,'\\@l'); }
-	
-	.uk-width-small\@l { width: $width-small-width; }
-    .uk-width-medium\@l { width: $width-medium-width; }
-    .uk-width-large\@l { width: $width-large-width; }
-    .uk-width-xlarge\@l { width: $width-xlarge-width; }
-    .uk-width-xxlarge\@l { width: $width-xxlarge-width; }
+	@include generate-columns('width', '\\@l');
 	
 }
 
 /* Large screen and bigger */
 @media (min-width: $breakpoint-xlarge) {
+	
+	.uk-width-small\@xl { width: $width-small-width; }
+    .uk-width-medium\@xl { width: $width-medium-width; }
+    .uk-width-large\@xl { width: $width-large-width; }
+    .uk-width-xlarge\@xl { width: $width-xlarge-width; }
+    .uk-width-xxlarge\@xl { width: $width-xxlarge-width; }
 	
 	.uk-width-auto\@xl { width: auto; }
 	.uk-width-expand\@xl {
@@ -616,47 +346,14 @@ $push:                                          true;
 	}
 	
 	.uk-width-1-1\@xl > * { width: 100%; }
-	@include getCols('width',1,2,'\\@xl');
-	@include getCols('width',1,3,'\\@xl');
-	@include getCols('width',1,4,'\\@xl');
-	@include getCols('width',1,5,'\\@xl');
-	@include getCols('width',1,6,'\\@xl');
-	@if $col-7  { @include getCols('width',1,7, '\\@xl'); }
-	@if $col-8  { @include getCols('width',1,8, '\\@xl'); }
-	@if $col-9  { @include getCols('width',1,9, '\\@xl'); }
-	@if $col-10 { @include getCols('width',1,10,'\\@xl'); }
-	@if $col-11 { @include getCols('width',1,11,'\\@xl'); }
-	@if $col-12 { @include getCols('width',1,12,'\\@xl'); }
-	@if $col-13 { @include getCols('width',1,13,'\\@xl'); }
-	@if $col-14 { @include getCols('width',1,14,'\\@xl'); }
-	@if $col-15 { @include getCols('width',1,15,'\\@xl'); }
-	@if $col-16 { @include getCols('width',1,16,'\\@xl'); }
-	@if $col-17 { @include getCols('width',1,17,'\\@xl'); }
-	@if $col-18 { @include getCols('width',1,18,'\\@xl'); }
-	@if $col-19 { @include getCols('width',1,19,'\\@xl'); }
-	@if $col-20 { @include getCols('width',1,20,'\\@xl'); }
-	@if $col-21 { @include getCols('width',1,21,'\\@xl'); }
-	@if $col-22 { @include getCols('width',1,22,'\\@xl'); }
-	@if $col-23 { @include getCols('width',1,23,'\\@xl'); }
-	@if $col-24 { @include getCols('width',1,24,'\\@xl'); }
-	@if $col-25 { @include getCols('width',1,25,'\\@xl'); }
-	@if $col-26 { @include getCols('width',1,26,'\\@xl'); }
-	@if $col-27 { @include getCols('width',1,27,'\\@xl'); }
-	@if $col-28 { @include getCols('width',1,28,'\\@xl'); }
-	@if $col-29 { @include getCols('width',1,29,'\\@xl'); }
-	@if $col-30 { @include getCols('width',1,30,'\\@xl'); }
-	
-	.uk-width-small\@xl { width: $width-small-width; }
-    .uk-width-medium\@xl { width: $width-medium-width; }
-    .uk-width-large\@xl { width: $width-large-width; }
-    .uk-width-xlarge\@xl { width: $width-xlarge-width; }
-    .uk-width-xxlarge\@xl { width: $width-xxlarge-width; }
+	@include generate-columns('width', '\\@xl');
 	
 }
 
 
 /* Sub-object: `uk-push-*` and `uk-pull-*`
  ========================================================================== */
+
 
 @if $push {
 	
@@ -665,35 +362,7 @@ $push:                                          true;
 		position: relative;
 	}
 	
-	@include getCols('push', 1, 2, '', 'left');
-	@include getCols('push', 1, 3, '', 'left');
-	@include getCols('push', 1, 4, '', 'left');
-	@include getCols('push', 1, 5, '', 'left');
-	@include getCols('push', 1, 6, '', 'left');
-	@if $col-7  { @include getCols('push', 1, 7,  '', 'left'); }
-	@if $col-8  { @include getCols('push', 1, 8,  '', 'left'); }
-	@if $col-9  { @include getCols('push', 1, 9,  '', 'left'); }
-	@if $col-10 { @include getCols('push', 1, 10, '', 'left'); }
-	@if $col-11 { @include getCols('push', 1, 11, '', 'left'); }
-	@if $col-12 { @include getCols('push', 1, 12, '', 'left'); }
-	@if $col-13 { @include getCols('push', 1, 13, '', 'left'); }
-	@if $col-14 { @include getCols('push', 1, 14, '', 'left'); }
-	@if $col-15 { @include getCols('push', 1, 15, '', 'left'); }
-	@if $col-16 { @include getCols('push', 1, 16, '', 'left'); }
-	@if $col-17 { @include getCols('push', 1, 17, '', 'left'); }
-	@if $col-18 { @include getCols('push', 1, 18, '', 'left'); }
-	@if $col-19 { @include getCols('push', 1, 19, '', 'left'); }
-	@if $col-20 { @include getCols('push', 1, 20, '', 'left'); }
-	@if $col-21 { @include getCols('push', 1, 21, '', 'left'); }
-	@if $col-22 { @include getCols('push', 1, 22, '', 'left'); }
-	@if $col-23 { @include getCols('push', 1, 23, '', 'left'); }
-	@if $col-24 { @include getCols('push', 1, 24, '', 'left'); }
-	@if $col-25 { @include getCols('push', 1, 25, '', 'left'); }
-	@if $col-26 { @include getCols('push', 1, 26, '', 'left'); }
-	@if $col-27 { @include getCols('push', 1, 27, '', 'left'); }
-	@if $col-28 { @include getCols('push', 1, 28, '', 'left'); }
-	@if $col-29 { @include getCols('push', 1, 29, '', 'left'); }
-	@if $col-30 { @include getCols('push', 1, 30, '', 'left'); }
+	@include generate-columns('push', '', 'left');
 	
 }
 
@@ -704,405 +373,58 @@ $push:                                          true;
 		position: relative;
 	}
 	
-	@include getCols('pull', 1, 2, '', 'left', true);
-	@include getCols('pull', 1, 3, '', 'left', true);
-	@include getCols('pull', 1, 4, '', 'left', true);
-	@include getCols('pull', 1, 5, '', 'left', true);
-	@include getCols('pull', 1, 6, '', 'left', true);
-	@if $col-7  { @include getCols('pull', 1, 7,  '', 'left', true); }
-	@if $col-8  { @include getCols('pull', 1, 8,  '', 'left', true); }
-	@if $col-9  { @include getCols('pull', 1, 9,  '', 'left', true); }
-	@if $col-10 { @include getCols('pull', 1, 10, '', 'left', true); }
-	@if $col-11 { @include getCols('pull', 1, 11, '', 'left', true); }
-	@if $col-12 { @include getCols('pull', 1, 12, '', 'left', true); }
-	@if $col-13 { @include getCols('pull', 1, 13, '', 'left', true); }
-	@if $col-14 { @include getCols('pull', 1, 14, '', 'left', true); }
-	@if $col-15 { @include getCols('pull', 1, 15, '', 'left', true); }
-	@if $col-16 { @include getCols('pull', 1, 16, '', 'left', true); }
-	@if $col-17 { @include getCols('pull', 1, 17, '', 'left', true); }
-	@if $col-18 { @include getCols('pull', 1, 18, '', 'left', true); }
-	@if $col-19 { @include getCols('pull', 1, 19, '', 'left', true); }
-	@if $col-20 { @include getCols('pull', 1, 20, '', 'left', true); }
-	@if $col-21 { @include getCols('pull', 1, 21, '', 'left', true); }
-	@if $col-22 { @include getCols('pull', 1, 22, '', 'left', true); }
-	@if $col-23 { @include getCols('pull', 1, 23, '', 'left', true); }
-	@if $col-24 { @include getCols('pull', 1, 24, '', 'left', true); }
-	@if $col-25 { @include getCols('pull', 1, 25, '', 'left', true); }
-	@if $col-26 { @include getCols('pull', 1, 26, '', 'left', true); }
-	@if $col-27 { @include getCols('pull', 1, 27, '', 'left', true); }
-	@if $col-28 { @include getCols('pull', 1, 28, '', 'left', true); }
-	@if $col-29 { @include getCols('pull', 1, 29, '', 'left', true); }
-	@if $col-30 { @include getCols('pull', 1, 30, '', 'left', true); }
-	
-}
+	@include generate-columns('pull', '', 'left', true);
 
-/* Old phone landscape and smaller */
+}
+	
+/* Old phone landscape and bigger */
 @media (min-width: $breakpoint-xsmall) {
-	
-	@if $push {
-		
-		@include getCols('push', 1, 2, '\\@xs', 'left');
-		@include getCols('push', 1, 3, '\\@xs', 'left');
-		@include getCols('push', 1, 4, '\\@xs', 'left');
-		@include getCols('push', 1, 5, '\\@xs', 'left');
-		@include getCols('push', 1, 6, '\\@xs', 'left');
-		@if $col-7  { @include getCols('push', 1, 7,  '\\@xs', 'left'); }
-		@if $col-8  { @include getCols('push', 1, 8,  '\\@xs', 'left'); }
-		@if $col-9  { @include getCols('push', 1, 9,  '\\@xs', 'left'); }
-		@if $col-10 { @include getCols('push', 1, 10, '\\@xs', 'left'); }
-		@if $col-11 { @include getCols('push', 1, 11, '\\@xs', 'left'); }
-		@if $col-12 { @include getCols('push', 1, 12, '\\@xs', 'left'); }
-		@if $col-13 { @include getCols('push', 1, 13, '\\@xs', 'left'); }
-		@if $col-14 { @include getCols('push', 1, 14, '\\@xs', 'left'); }
-		@if $col-15 { @include getCols('push', 1, 15, '\\@xs', 'left'); }
-		@if $col-16 { @include getCols('push', 1, 16, '\\@xs', 'left'); }
-		@if $col-17 { @include getCols('push', 1, 17, '\\@xs', 'left'); }
-		@if $col-18 { @include getCols('push', 1, 18, '\\@xs', 'left'); }
-		@if $col-19 { @include getCols('push', 1, 19, '\\@xs', 'left'); }
-		@if $col-20 { @include getCols('push', 1, 20, '\\@xs', 'left'); }
-		@if $col-21 { @include getCols('push', 1, 21, '\\@xs', 'left'); }
-		@if $col-22 { @include getCols('push', 1, 22, '\\@xs', 'left'); }
-		@if $col-23 { @include getCols('push', 1, 23, '\\@xs', 'left'); }
-		@if $col-24 { @include getCols('push', 1, 24, '\\@xs', 'left'); }
-		@if $col-25 { @include getCols('push', 1, 25, '\\@xs', 'left'); }
-		@if $col-26 { @include getCols('push', 1, 26, '\\@xs', 'left'); }
-		@if $col-27 { @include getCols('push', 1, 27, '\\@xs', 'left'); }
-		@if $col-28 { @include getCols('push', 1, 28, '\\@xs', 'left'); }
-		@if $col-29 { @include getCols('push', 1, 29, '\\@xs', 'left'); }
-		@if $col-30 { @include getCols('push', 1, 30, '\\@xs', 'left'); }
-		
-	}
 
-	@if $pull {
-		
-		@include getCols('pull', 1, 2, '\\@xs', 'left', true);
-		@include getCols('pull', 1, 3, '\\@xs', 'left', true);
-		@include getCols('pull', 1, 4, '\\@xs', 'left', true);
-		@include getCols('pull', 1, 5, '\\@xs', 'left', true);
-		@include getCols('pull', 1, 6, '\\@xs', 'left', true);
-		@if $col-7  { @include getCols('pull', 1, 7,  '\\@xs', 'left', true); }
-		@if $col-8  { @include getCols('pull', 1, 8,  '\\@xs', 'left', true); }
-		@if $col-9  { @include getCols('pull', 1, 9,  '\\@xs', 'left', true); }
-		@if $col-10 { @include getCols('pull', 1, 10, '\\@xs', 'left', true); }
-		@if $col-11 { @include getCols('pull', 1, 11, '\\@xs', 'left', true); }
-		@if $col-12 { @include getCols('pull', 1, 12, '\\@xs', 'left', true); }
-		@if $col-13 { @include getCols('pull', 1, 13, '\\@xs', 'left', true); }
-		@if $col-14 { @include getCols('pull', 1, 14, '\\@xs', 'left', true); }
-		@if $col-15 { @include getCols('pull', 1, 15, '\\@xs', 'left', true); }
-		@if $col-16 { @include getCols('pull', 1, 16, '\\@xs', 'left', true); }
-		@if $col-17 { @include getCols('pull', 1, 17, '\\@xs', 'left', true); }
-		@if $col-18 { @include getCols('pull', 1, 18, '\\@xs', 'left', true); }
-		@if $col-19 { @include getCols('pull', 1, 19, '\\@xs', 'left', true); }
-		@if $col-20 { @include getCols('pull', 1, 20, '\\@xs', 'left', true); }
-		@if $col-21 { @include getCols('pull', 1, 21, '\\@xs', 'left', true); }
-		@if $col-22 { @include getCols('pull', 1, 22, '\\@xs', 'left', true); }
-		@if $col-23 { @include getCols('pull', 1, 23, '\\@xs', 'left', true); }
-		@if $col-24 { @include getCols('pull', 1, 24, '\\@xs', 'left', true); }
-		@if $col-25 { @include getCols('pull', 1, 25, '\\@xs', 'left', true); }
-		@if $col-26 { @include getCols('pull', 1, 26, '\\@xs', 'left', true); }
-		@if $col-27 { @include getCols('pull', 1, 27, '\\@xs', 'left', true); }
-		@if $col-28 { @include getCols('pull', 1, 28, '\\@xs', 'left', true); }
-		@if $col-29 { @include getCols('pull', 1, 29, '\\@xs', 'left', true); }
-		@if $col-30 { @include getCols('pull', 1, 30, '\\@xs', 'left', true); }
-		
-	}
+	@if $push { @include generate-columns('push', '\\@xs', 'left'); }
 	
+	@if $pull { @include generate-columns('pull', '\\@xs', 'left', true); }
+		
 }
-
-/* Phone landscape and smaller */
-@media (min-width: $breakpoint-small) {
 	
-	@if $push {
-		
-		@include getCols('push', 1, 2, '\\@s', 'left');
-		@include getCols('push', 1, 3, '\\@s', 'left');
-		@include getCols('push', 1, 4, '\\@s', 'left');
-		@include getCols('push', 1, 5, '\\@s', 'left');
-		@include getCols('push', 1, 6, '\\@s', 'left');
-		@if $col-7  { @include getCols('push', 1, 7,  '\\@s', 'left'); }
-		@if $col-8  { @include getCols('push', 1, 8,  '\\@s', 'left'); }
-		@if $col-9  { @include getCols('push', 1, 9,  '\\@s', 'left'); }
-		@if $col-10 { @include getCols('push', 1, 10, '\\@s', 'left'); }
-		@if $col-11 { @include getCols('push', 1, 11, '\\@s', 'left'); }
-		@if $col-12 { @include getCols('push', 1, 12, '\\@s', 'left'); }
-		@if $col-13 { @include getCols('push', 1, 13, '\\@s', 'left'); }
-		@if $col-14 { @include getCols('push', 1, 14, '\\@s', 'left'); }
-		@if $col-15 { @include getCols('push', 1, 15, '\\@s', 'left'); }
-		@if $col-16 { @include getCols('push', 1, 16, '\\@s', 'left'); }
-		@if $col-17 { @include getCols('push', 1, 17, '\\@s', 'left'); }
-		@if $col-18 { @include getCols('push', 1, 18, '\\@s', 'left'); }
-		@if $col-19 { @include getCols('push', 1, 19, '\\@s', 'left'); }
-		@if $col-20 { @include getCols('push', 1, 20, '\\@s', 'left'); }
-		@if $col-21 { @include getCols('push', 1, 21, '\\@s', 'left'); }
-		@if $col-22 { @include getCols('push', 1, 22, '\\@s', 'left'); }
-		@if $col-23 { @include getCols('push', 1, 23, '\\@s', 'left'); }
-		@if $col-24 { @include getCols('push', 1, 24, '\\@s', 'left'); }
-		@if $col-25 { @include getCols('push', 1, 25, '\\@s', 'left'); }
-		@if $col-26 { @include getCols('push', 1, 26, '\\@s', 'left'); }
-		@if $col-27 { @include getCols('push', 1, 27, '\\@s', 'left'); }
-		@if $col-28 { @include getCols('push', 1, 28, '\\@s', 'left'); }
-		@if $col-29 { @include getCols('push', 1, 29, '\\@s', 'left'); }
-		@if $col-30 { @include getCols('push', 1, 30, '\\@s', 'left'); }
-		
-	}
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
 
-	@if $pull {
-		
-		@include getCols('pull', 1, 2, '\\@s', 'left', true);
-		@include getCols('pull', 1, 3, '\\@s', 'left', true);
-		@include getCols('pull', 1, 4, '\\@s', 'left', true);
-		@include getCols('pull', 1, 5, '\\@s', 'left', true);
-		@include getCols('pull', 1, 6, '\\@s', 'left', true);
-		@if $col-7  { @include getCols('pull', 1, 7,  '\\@s', 'left', true); }
-		@if $col-8  { @include getCols('pull', 1, 8,  '\\@s', 'left', true); }
-		@if $col-9  { @include getCols('pull', 1, 9,  '\\@s', 'left', true); }
-		@if $col-10 { @include getCols('pull', 1, 10, '\\@s', 'left', true); }
-		@if $col-11 { @include getCols('pull', 1, 11, '\\@s', 'left', true); }
-		@if $col-12 { @include getCols('pull', 1, 12, '\\@s', 'left', true); }
-		@if $col-13 { @include getCols('pull', 1, 13, '\\@s', 'left', true); }
-		@if $col-14 { @include getCols('pull', 1, 14, '\\@s', 'left', true); }
-		@if $col-15 { @include getCols('pull', 1, 15, '\\@s', 'left', true); }
-		@if $col-16 { @include getCols('pull', 1, 16, '\\@s', 'left', true); }
-		@if $col-17 { @include getCols('pull', 1, 17, '\\@s', 'left', true); }
-		@if $col-18 { @include getCols('pull', 1, 18, '\\@s', 'left', true); }
-		@if $col-19 { @include getCols('pull', 1, 19, '\\@s', 'left', true); }
-		@if $col-20 { @include getCols('pull', 1, 20, '\\@s', 'left', true); }
-		@if $col-21 { @include getCols('pull', 1, 21, '\\@s', 'left', true); }
-		@if $col-22 { @include getCols('pull', 1, 22, '\\@s', 'left', true); }
-		@if $col-23 { @include getCols('pull', 1, 23, '\\@s', 'left', true); }
-		@if $col-24 { @include getCols('pull', 1, 24, '\\@s', 'left', true); }
-		@if $col-25 { @include getCols('pull', 1, 25, '\\@s', 'left', true); }
-		@if $col-26 { @include getCols('pull', 1, 26, '\\@s', 'left', true); }
-		@if $col-27 { @include getCols('pull', 1, 27, '\\@s', 'left', true); }
-		@if $col-28 { @include getCols('pull', 1, 28, '\\@s', 'left', true); }
-		@if $col-29 { @include getCols('pull', 1, 29, '\\@s', 'left', true); }
-		@if $col-30 { @include getCols('pull', 1, 30, '\\@s', 'left', true); }
-		
-	}
+	@if $push { @include generate-columns('push', '\\@s', 'left'); }
+	
+	@if $pull { @include generate-columns('pull', '\\@s', 'left', true); }
 	
 }
 
 /* Tablet landscape and bigger */
 @media (min-width: $breakpoint-medium) {
-	
-	@if $push {
-		
-		@include getCols('push', 1, 2, '\\@m', 'left');
-		@include getCols('push', 1, 3, '\\@m', 'left');
-		@include getCols('push', 1, 4, '\\@m', 'left');
-		@include getCols('push', 1, 5, '\\@m', 'left');
-		@include getCols('push', 1, 6, '\\@m', 'left');
-		@if $col-7  { @include getCols('push', 1, 7,  '\\@m', 'left'); }
-		@if $col-8  { @include getCols('push', 1, 8,  '\\@m', 'left'); }
-		@if $col-9  { @include getCols('push', 1, 9,  '\\@m', 'left'); }
-		@if $col-10 { @include getCols('push', 1, 10, '\\@m', 'left'); }
-		@if $col-11 { @include getCols('push', 1, 11, '\\@m', 'left'); }
-		@if $col-12 { @include getCols('push', 1, 12, '\\@m', 'left'); }
-		@if $col-13 { @include getCols('push', 1, 13, '\\@m', 'left'); }
-		@if $col-14 { @include getCols('push', 1, 14, '\\@m', 'left'); }
-		@if $col-15 { @include getCols('push', 1, 15, '\\@m', 'left'); }
-		@if $col-16 { @include getCols('push', 1, 16, '\\@m', 'left'); }
-		@if $col-17 { @include getCols('push', 1, 17, '\\@m', 'left'); }
-		@if $col-18 { @include getCols('push', 1, 18, '\\@m', 'left'); }
-		@if $col-19 { @include getCols('push', 1, 19, '\\@m', 'left'); }
-		@if $col-20 { @include getCols('push', 1, 20, '\\@m', 'left'); }
-		@if $col-21 { @include getCols('push', 1, 21, '\\@m', 'left'); }
-		@if $col-22 { @include getCols('push', 1, 22, '\\@m', 'left'); }
-		@if $col-23 { @include getCols('push', 1, 23, '\\@m', 'left'); }
-		@if $col-24 { @include getCols('push', 1, 24, '\\@m', 'left'); }
-		@if $col-25 { @include getCols('push', 1, 25, '\\@m', 'left'); }
-		@if $col-26 { @include getCols('push', 1, 26, '\\@m', 'left'); }
-		@if $col-27 { @include getCols('push', 1, 27, '\\@m', 'left'); }
-		@if $col-28 { @include getCols('push', 1, 28, '\\@m', 'left'); }
-		@if $col-29 { @include getCols('push', 1, 29, '\\@m', 'left'); }
-		@if $col-30 { @include getCols('push', 1, 30, '\\@m', 'left'); }
-		
-	}
 
-	@if $pull {
-		
-		@include getCols('pull', 1, 2, '\\@m', 'left', true);
-		@include getCols('pull', 1, 3, '\\@m', 'left', true);
-		@include getCols('pull', 1, 4, '\\@m', 'left', true);
-		@include getCols('pull', 1, 5, '\\@m', 'left', true);
-		@include getCols('pull', 1, 6, '\\@m', 'left', true);
-		@if $col-7  { @include getCols('pull', 1, 7,  '\\@m', 'left', true); }
-		@if $col-8  { @include getCols('pull', 1, 8,  '\\@m', 'left', true); }
-		@if $col-9  { @include getCols('pull', 1, 9,  '\\@m', 'left', true); }
-		@if $col-10 { @include getCols('pull', 1, 10, '\\@m', 'left', true); }
-		@if $col-11 { @include getCols('pull', 1, 11, '\\@m', 'left', true); }
-		@if $col-12 { @include getCols('pull', 1, 12, '\\@m', 'left', true); }
-		@if $col-13 { @include getCols('pull', 1, 13, '\\@m', 'left', true); }
-		@if $col-14 { @include getCols('pull', 1, 14, '\\@m', 'left', true); }
-		@if $col-15 { @include getCols('pull', 1, 15, '\\@m', 'left', true); }
-		@if $col-16 { @include getCols('pull', 1, 16, '\\@m', 'left', true); }
-		@if $col-17 { @include getCols('pull', 1, 17, '\\@m', 'left', true); }
-		@if $col-18 { @include getCols('pull', 1, 18, '\\@m', 'left', true); }
-		@if $col-19 { @include getCols('pull', 1, 19, '\\@m', 'left', true); }
-		@if $col-20 { @include getCols('pull', 1, 20, '\\@m', 'left', true); }
-		@if $col-21 { @include getCols('pull', 1, 21, '\\@m', 'left', true); }
-		@if $col-22 { @include getCols('pull', 1, 22, '\\@m', 'left', true); }
-		@if $col-23 { @include getCols('pull', 1, 23, '\\@m', 'left', true); }
-		@if $col-24 { @include getCols('pull', 1, 24, '\\@m', 'left', true); }
-		@if $col-25 { @include getCols('pull', 1, 25, '\\@m', 'left', true); }
-		@if $col-26 { @include getCols('pull', 1, 26, '\\@m', 'left', true); }
-		@if $col-27 { @include getCols('pull', 1, 27, '\\@m', 'left', true); }
-		@if $col-28 { @include getCols('pull', 1, 28, '\\@m', 'left', true); }
-		@if $col-29 { @include getCols('pull', 1, 29, '\\@m', 'left', true); }
-		@if $col-30 { @include getCols('pull', 1, 30, '\\@m', 'left', true); }
-		
-	}
+	@if $push { @include generate-columns('push', '\\@m', 'left'); }
 	
+	@if $pull { @include generate-columns('pull', '\\@m', 'left', true); }
+
 }
 
 /* Desktop and bigger */
 @media (min-width: $breakpoint-large) {
-	
-	@if $push {
-		
-		@include getCols('push', 1, 2, '\\@l', 'left');
-		@include getCols('push', 1, 3, '\\@l', 'left');
-		@include getCols('push', 1, 4, '\\@l', 'left');
-		@include getCols('push', 1, 5, '\\@l', 'left');
-		@include getCols('push', 1, 6, '\\@l', 'left');
-		@if $col-7  { @include getCols('push', 1, 7,  '\\@l', 'left'); }
-		@if $col-8  { @include getCols('push', 1, 8,  '\\@l', 'left'); }
-		@if $col-9  { @include getCols('push', 1, 9,  '\\@l', 'left'); }
-		@if $col-10 { @include getCols('push', 1, 10, '\\@l', 'left'); }
-		@if $col-11 { @include getCols('push', 1, 11, '\\@l', 'left'); }
-		@if $col-12 { @include getCols('push', 1, 12, '\\@l', 'left'); }
-		@if $col-13 { @include getCols('push', 1, 13, '\\@l', 'left'); }
-		@if $col-14 { @include getCols('push', 1, 14, '\\@l', 'left'); }
-		@if $col-15 { @include getCols('push', 1, 15, '\\@l', 'left'); }
-		@if $col-16 { @include getCols('push', 1, 16, '\\@l', 'left'); }
-		@if $col-17 { @include getCols('push', 1, 17, '\\@l', 'left'); }
-		@if $col-18 { @include getCols('push', 1, 18, '\\@l', 'left'); }
-		@if $col-19 { @include getCols('push', 1, 19, '\\@l', 'left'); }
-		@if $col-20 { @include getCols('push', 1, 20, '\\@l', 'left'); }
-		@if $col-21 { @include getCols('push', 1, 21, '\\@l', 'left'); }
-		@if $col-22 { @include getCols('push', 1, 22, '\\@l', 'left'); }
-		@if $col-23 { @include getCols('push', 1, 23, '\\@l', 'left'); }
-		@if $col-24 { @include getCols('push', 1, 24, '\\@l', 'left'); }
-		@if $col-25 { @include getCols('push', 1, 25, '\\@l', 'left'); }
-		@if $col-26 { @include getCols('push', 1, 26, '\\@l', 'left'); }
-		@if $col-27 { @include getCols('push', 1, 27, '\\@l', 'left'); }
-		@if $col-28 { @include getCols('push', 1, 28, '\\@l', 'left'); }
-		@if $col-29 { @include getCols('push', 1, 29, '\\@l', 'left'); }
-		@if $col-30 { @include getCols('push', 1, 30, '\\@l', 'left'); }
-		
-	}
 
-	@if $pull {
-		
-		@include getCols('pull', 1, 2, '\\@l', 'left', true);
-		@include getCols('pull', 1, 3, '\\@l', 'left', true);
-		@include getCols('pull', 1, 4, '\\@l', 'left', true);
-		@include getCols('pull', 1, 5, '\\@l', 'left', true);
-		@include getCols('pull', 1, 6, '\\@l', 'left', true);
-		@if $col-7  { @include getCols('pull', 1, 7,  '\\@l', 'left', true); }
-		@if $col-8  { @include getCols('pull', 1, 8,  '\\@l', 'left', true); }
-		@if $col-9  { @include getCols('pull', 1, 9,  '\\@l', 'left', true); }
-		@if $col-10 { @include getCols('pull', 1, 10, '\\@l', 'left', true); }
-		@if $col-11 { @include getCols('pull', 1, 11, '\\@l', 'left', true); }
-		@if $col-12 { @include getCols('pull', 1, 12, '\\@l', 'left', true); }
-		@if $col-13 { @include getCols('pull', 1, 13, '\\@l', 'left', true); }
-		@if $col-14 { @include getCols('pull', 1, 14, '\\@l', 'left', true); }
-		@if $col-15 { @include getCols('pull', 1, 15, '\\@l', 'left', true); }
-		@if $col-16 { @include getCols('pull', 1, 16, '\\@l', 'left', true); }
-		@if $col-17 { @include getCols('pull', 1, 17, '\\@l', 'left', true); }
-		@if $col-18 { @include getCols('pull', 1, 18, '\\@l', 'left', true); }
-		@if $col-19 { @include getCols('pull', 1, 19, '\\@l', 'left', true); }
-		@if $col-20 { @include getCols('pull', 1, 20, '\\@l', 'left', true); }
-		@if $col-21 { @include getCols('pull', 1, 21, '\\@l', 'left', true); }
-		@if $col-22 { @include getCols('pull', 1, 22, '\\@l', 'left', true); }
-		@if $col-23 { @include getCols('pull', 1, 23, '\\@l', 'left', true); }
-		@if $col-24 { @include getCols('pull', 1, 24, '\\@l', 'left', true); }
-		@if $col-25 { @include getCols('pull', 1, 25, '\\@l', 'left', true); }
-		@if $col-26 { @include getCols('pull', 1, 26, '\\@l', 'left', true); }
-		@if $col-27 { @include getCols('pull', 1, 27, '\\@l', 'left', true); }
-		@if $col-28 { @include getCols('pull', 1, 28, '\\@l', 'left', true); }
-		@if $col-29 { @include getCols('pull', 1, 29, '\\@l', 'left', true); }
-		@if $col-30 { @include getCols('pull', 1, 30, '\\@l', 'left', true); }
-		
-	}
+	@if $push { @include generate-columns('push', '\\@l', 'left'); }
 	
+	@if $pull { @include generate-columns('pull', '\\@l', 'left', true); }
+
 }
 
 /* Large screen and bigger */
 @media (min-width: $breakpoint-xlarge) {
-	
-	@if $push {
-		
-		@include getCols('push', 1, 2, '\\@xl', 'left');
-		@include getCols('push', 1, 3, '\\@xl', 'left');
-		@include getCols('push', 1, 4, '\\@xl', 'left');
-		@include getCols('push', 1, 5, '\\@xl', 'left');
-		@include getCols('push', 1, 6, '\\@xl', 'left');
-		@if $col-7  { @include getCols('push', 1, 7,  '\\@xl', 'left'); }
-		@if $col-8  { @include getCols('push', 1, 8,  '\\@xl', 'left'); }
-		@if $col-9  { @include getCols('push', 1, 9,  '\\@xl', 'left'); }
-		@if $col-10 { @include getCols('push', 1, 10, '\\@xl', 'left'); }
-		@if $col-11 { @include getCols('push', 1, 11, '\\@xl', 'left'); }
-		@if $col-12 { @include getCols('push', 1, 12, '\\@xl', 'left'); }
-		@if $col-13 { @include getCols('push', 1, 13, '\\@xl', 'left'); }
-		@if $col-14 { @include getCols('push', 1, 14, '\\@xl', 'left'); }
-		@if $col-15 { @include getCols('push', 1, 15, '\\@xl', 'left'); }
-		@if $col-16 { @include getCols('push', 1, 16, '\\@xl', 'left'); }
-		@if $col-17 { @include getCols('push', 1, 17, '\\@xl', 'left'); }
-		@if $col-18 { @include getCols('push', 1, 18, '\\@xl', 'left'); }
-		@if $col-19 { @include getCols('push', 1, 19, '\\@xl', 'left'); }
-		@if $col-20 { @include getCols('push', 1, 20, '\\@xl', 'left'); }
-		@if $col-21 { @include getCols('push', 1, 21, '\\@xl', 'left'); }
-		@if $col-22 { @include getCols('push', 1, 22, '\\@xl', 'left'); }
-		@if $col-23 { @include getCols('push', 1, 23, '\\@xl', 'left'); }
-		@if $col-24 { @include getCols('push', 1, 24, '\\@xl', 'left'); }
-		@if $col-25 { @include getCols('push', 1, 25, '\\@xl', 'left'); }
-		@if $col-26 { @include getCols('push', 1, 26, '\\@xl', 'left'); }
-		@if $col-27 { @include getCols('push', 1, 27, '\\@xl', 'left'); }
-		@if $col-28 { @include getCols('push', 1, 28, '\\@xl', 'left'); }
-		@if $col-29 { @include getCols('push', 1, 29, '\\@xl', 'left'); }
-		@if $col-30 { @include getCols('push', 1, 30, '\\@xl', 'left'); }
-		
-	}
 
-	@if $pull {
-		
-		@include getCols('pull', 1, 2, '\\@xl', 'left', true);
-		@include getCols('pull', 1, 3, '\\@xl', 'left', true);
-		@include getCols('pull', 1, 4, '\\@xl', 'left', true);
-		@include getCols('pull', 1, 5, '\\@xl', 'left', true);
-		@include getCols('pull', 1, 6, '\\@xl', 'left', true);
-		@if $col-7  { @include getCols('pull', 1, 7,  '\\@xl', 'left', true); }
-		@if $col-8  { @include getCols('pull', 1, 8,  '\\@xl', 'left', true); }
-		@if $col-9  { @include getCols('pull', 1, 9,  '\\@xl', 'left', true); }
-		@if $col-10 { @include getCols('pull', 1, 10, '\\@xl', 'left', true); }
-		@if $col-11 { @include getCols('pull', 1, 11, '\\@xl', 'left', true); }
-		@if $col-12 { @include getCols('pull', 1, 12, '\\@xl', 'left', true); }
-		@if $col-13 { @include getCols('pull', 1, 13, '\\@xl', 'left', true); }
-		@if $col-14 { @include getCols('pull', 1, 14, '\\@xl', 'left', true); }
-		@if $col-15 { @include getCols('pull', 1, 15, '\\@xl', 'left', true); }
-		@if $col-16 { @include getCols('pull', 1, 16, '\\@xl', 'left', true); }
-		@if $col-17 { @include getCols('pull', 1, 17, '\\@xl', 'left', true); }
-		@if $col-18 { @include getCols('pull', 1, 18, '\\@xl', 'left', true); }
-		@if $col-19 { @include getCols('pull', 1, 19, '\\@xl', 'left', true); }
-		@if $col-20 { @include getCols('pull', 1, 20, '\\@xl', 'left', true); }
-		@if $col-21 { @include getCols('pull', 1, 21, '\\@xl', 'left', true); }
-		@if $col-22 { @include getCols('pull', 1, 22, '\\@xl', 'left', true); }
-		@if $col-23 { @include getCols('pull', 1, 23, '\\@xl', 'left', true); }
-		@if $col-24 { @include getCols('pull', 1, 24, '\\@xl', 'left', true); }
-		@if $col-25 { @include getCols('pull', 1, 25, '\\@xl', 'left', true); }
-		@if $col-26 { @include getCols('pull', 1, 26, '\\@xl', 'left', true); }
-		@if $col-27 { @include getCols('pull', 1, 27, '\\@xl', 'left', true); }
-		@if $col-28 { @include getCols('pull', 1, 28, '\\@xl', 'left', true); }
-		@if $col-29 { @include getCols('pull', 1, 29, '\\@xl', 'left', true); }
-		@if $col-30 { @include getCols('pull', 1, 30, '\\@xl', 'left', true); }
-		
-	}
+	@if $push { @include generate-columns('push', '\\@xl', 'left'); }
 	
+	@if $pull { @include generate-columns('pull', '\\@xl', 'left', true); }
+
 }
 
 
 // Hooks
 // ========================================================================
 
+@if( mixin-exists( hook-width-misc )) { @include hook-width-misc(); }
 @if( mixin-exists( hook-width-ex-misc )) { @include hook-width-ex-misc(); }

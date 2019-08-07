@@ -1,8 +1,8 @@
 [![uikit banner](https://cloud.githubusercontent.com/assets/321047/21769911/474d7d9e-d681-11e6-9fe0-d95f8ccfd3a9.jpg)](http://getuikit.com/)
 
-# uikit-ex
+# UIkit-ex
 
-LESS &amp; SCSS (uikit3 only) &amp; CSS extension framework UiKit, grid columns 7, 8, 9, 10 (uikit3 only) and 12 columns
+LESS &amp; SCSS (UIkit3 only) &amp; CSS extension for framework UiKit.
 
 ### grid-ex-uikit2 (deprecated)
 
@@ -11,8 +11,16 @@ Extension components `uk-width -*`, `uk-push -*`, `uk-pull-*` and modifier `uk-g
 ### width-ex-uikit3
 
 Extension components `uk-width-*` and `uk-child-width-*` with the purpose of providing full mesh on 1-30 columns.
+
 Add components `uk-push-*` and `uk-pull-*`.
+
 This component completely replaces the original component `width`.
+
+### grid-ex-uikit3
+
+Extension components `uk-grid-ex`. This component has variable vertical and horizontal indentation for each breakpoint.
+
+This component using only width original component `uk-grid`.
 
 ---
 
