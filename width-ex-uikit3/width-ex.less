@@ -23,7 +23,7 @@
 @width-medium-width:                           300px;
 @width-large-width:                            450px;
 @width-xlarge-width:                           600px;
-@width-xxlarge-width:                          750px;
+@width-2xlarge-width:                          750px;
 */
 
 @breakpoint-xsmall:                            480px;  // Old phone landscape
@@ -255,7 +255,8 @@
 .uk-width-medium { width: @width-medium-width; }
 .uk-width-large { width: @width-large-width; }
 .uk-width-xlarge { width: @width-xlarge-width; }
-.uk-width-xxlarge { width: @width-xxlarge-width; }
+.uk-width-2xlarge { width: @width-2xlarge-width; }
+.uk-width-xxlarge when (@deprecated = true) { width: @width-2xlarge-width; }
 
 .uk-width-auto { width: auto; }
 .uk-width-expand
@@ -277,7 +278,8 @@
 	.uk-width-medium\@xs { width: @width-medium-width; }
 	.uk-width-large\@xs { width: @width-large-width; }
 	.uk-width-xlarge\@xs { width: @width-xlarge-width; }
-	.uk-width-xxlarge\@xs { width: @width-xxlarge-width; }
+	.uk-width-2xlarge\@xs { width: @width-2xlarge-width; }
+	.uk-width-xxlarge\@xs when (@deprecated = true) { width: @width-2xlarge-width; }
 	
 	.uk-width-auto\@xs { width: auto; }
 	.uk-width-expand\@xs
@@ -301,7 +303,8 @@
 	.uk-width-medium\@s { width: @width-medium-width; }
 	.uk-width-large\@s { width: @width-large-width; }
 	.uk-width-xlarge\@s { width: @width-xlarge-width; }
-	.uk-width-xxlarge\@s { width: @width-xxlarge-width; }
+	.uk-width-2xlarge\@s { width: @width-2xlarge-width; }
+	.uk-width-xxlarge\@s when (@deprecated = true) { width: @width-2xlarge-width; }
 	
 	.uk-width-auto\@s { width: auto; }
 	.uk-width-expand\@s
@@ -325,7 +328,8 @@
 	.uk-width-medium\@m { width: @width-medium-width; }
 	.uk-width-large\@m { width: @width-large-width; }
 	.uk-width-xlarge\@m { width: @width-xlarge-width; }
-	.uk-width-xxlarge\@m { width: @width-xxlarge-width; }
+	.uk-width-2xlarge\@m { width: @width-2xlarge-width; }
+	.uk-width-xxlarge\@m when (@deprecated = true) { width: @width-2xlarge-width; }
 	
 	.uk-width-auto\@m { width: auto; }
 	.uk-width-expand\@m
@@ -349,7 +353,8 @@
 	.uk-width-medium\@l { width: @width-medium-width; }
 	.uk-width-large\@l { width: @width-large-width; }
 	.uk-width-xlarge\@l { width: @width-xlarge-width; }
-	.uk-width-xxlarge\@l { width: @width-xxlarge-width; }
+	.uk-width-2xlarge\@l { width: @width-2xlarge-width; }
+	.uk-width-xxlarge\@l when (@deprecated = true) { width: @width-2xlarge-width; }
 	
 	.uk-width-auto\@l { width: auto; }
 	.uk-width-expand\@l
@@ -373,7 +378,8 @@
 	.uk-width-medium\@xl { width: @width-medium-width; }
 	.uk-width-large\@xl { width: @width-large-width; }
 	.uk-width-xlarge\@xl { width: @width-xlarge-width; }
-	.uk-width-xxlarge\@xl { width: @width-xxlarge-width; }
+	.uk-width-2xlarge\@xl { width: @width-2xlarge-width; }
+	.uk-width-xxlarge\@xl when (@deprecated = true) { width: @width-2xlarge-width; }
 	
 	.uk-width-auto\@xl { width: auto; }
 	.uk-width-expand\@xl

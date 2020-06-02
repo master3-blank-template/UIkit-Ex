@@ -10,6 +10,8 @@ Extension components `uk-width -*`, `uk-push -*`, `uk-pull-*` and modifier `uk-g
 
 ### width-ex-uikit3
 
+**Adapted for UiKit 3.5.3**
+
 Extension components `uk-width-*` and `uk-child-width-*` with the purpose of providing full mesh on 1-30 columns.
 
 Add components `uk-push-*` and `uk-pull-*`.
