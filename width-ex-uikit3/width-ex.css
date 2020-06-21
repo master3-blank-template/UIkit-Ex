@@ -1,3 +1,4 @@
+/* Copy of variables from "variables.less"*/
 /* ========================================================================
    Component: Width extended
  ========================================================================== */
@@ -648,6 +649,9 @@
 }
 .uk-width-xlarge {
   width: 600px;
+}
+.uk-width-2xlarge {
+  width: 750px;
 }
 .uk-width-xxlarge {
   width: 750px;
@@ -1982,6 +1986,9 @@
   }
   .uk-width-xlarge\@xs {
     width: 600px;
+  }
+  .uk-width-2xlarge\@xs {
+    width: 750px;
   }
   .uk-width-xxlarge\@xs {
     width: 750px;
@@ -3318,6 +3325,9 @@
   .uk-width-xlarge\@s {
     width: 600px;
   }
+  .uk-width-2xlarge\@s {
+    width: 750px;
+  }
   .uk-width-xxlarge\@s {
     width: 750px;
   }
@@ -4652,6 +4662,9 @@
   }
   .uk-width-xlarge\@m {
     width: 600px;
+  }
+  .uk-width-2xlarge\@m {
+    width: 750px;
   }
   .uk-width-xxlarge\@m {
     width: 750px;
@@ -5988,6 +6001,9 @@
   .uk-width-xlarge\@l {
     width: 600px;
   }
+  .uk-width-2xlarge\@l {
+    width: 750px;
+  }
   .uk-width-xxlarge\@l {
     width: 750px;
   }
@@ -7322,6 +7338,9 @@
   }
   .uk-width-xlarge\@xl {
     width: 600px;
+  }
+  .uk-width-2xlarge\@xl {
+    width: 750px;
   }
   .uk-width-xxlarge\@xl {
     width: 750px;
